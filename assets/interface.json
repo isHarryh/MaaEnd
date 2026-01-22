@@ -13,12 +13,12 @@
     "controller": [
         {
             "name": "ADB",
-            "label": "模拟器",
+            "label": "安卓端",
             "type": "Adb"
         },
         {
             "name": "Win32",
-            "label": "PC",
+            "label": "电脑端",
             "type": "Win32",
             "win32": {
                 "class_regex": "UnityWndClass",

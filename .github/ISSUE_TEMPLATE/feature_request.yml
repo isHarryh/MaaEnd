@@ -1,0 +1,29 @@
+name: 功能建议 / Feature Request
+description: 提出新功能或改进建议 / Propose a new feature or improvement
+labels: ["enhancement"]
+body:
+    - type: textarea
+      id: description
+      attributes:
+          label: 功能描述 / Feature Description
+          description: |
+              请描述您希望添加的功能，以及使用场景。  
+              Describe the feature you'd like and its use case.
+      validations:
+          required: false
+
+    - type: input
+      id: version
+      attributes:
+          label: MaaEnd 版本 / Version
+          placeholder: "例如 / e.g.: v1.1.0"
+      validations:
+          required: false
+
+    - type: textarea
+      id: additional
+      attributes:
+          label: 其他信息 / Additional Information
+          description: 日志、截图等 / Logs, screenshots, etc.
+      validations:
+          required: false

@@ -5,25 +5,24 @@ body:
     - type: textarea
       id: description
       attributes:
-          label: 功能描述 / Feature Description
+          label: 功能描述
           description: |
               请描述您希望添加的功能，以及使用场景。  
-              Describe the feature you'd like and its use case.
       validations:
           required: false
 
     - type: input
       id: version
       attributes:
-          label: MaaEnd 版本 / Version
-          placeholder: "例如 / e.g.: v1.1.0"
+          label: MaaEnd 版本
+          placeholder: "例如: v1.1.0"
       validations:
           required: false
 
     - type: textarea
       id: additional
       attributes:
-          label: 其他信息 / Additional Information
-          description: 日志、截图等 / Logs, screenshots, etc.
+          label: 其他信息
+          description: 日志、截图等
       validations:
           required: false

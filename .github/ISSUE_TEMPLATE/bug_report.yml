@@ -1,12 +1,11 @@
 name: Bug 报告 / Bug Report
-description: Bug / 崩溃 / 识别问题 / Bug, Crash, or Recognition Issues
+description: Bug / 使用问题 / 识别错误等 / Bug, Usage Issue, Recognition Error, etc.
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        ## 提交前请阅读
-        📖 **[问题反馈指南](https://github.com/MaaEnd/MaaEnd/blob/main/docs/users/troubleshooting.md)**
+        📖 **提交前请阅读 [问题反馈指南](https://github.com/MaaEnd/MaaEnd/blob/main/docs/users/troubleshooting.md)**  
         ⚠️ **请先更新到最新版本的 MaaEnd，确认问题是否仍然存在后再提交 Issue。**
 
   - type: textarea
@@ -27,7 +26,7 @@ body:
     attributes:
       label: 日志文件
       description: |
-        请将整个 `debug` 文件夹压缩后上传。
+        请将整个 `debug` 文件夹压缩后上传。  
         💡 若找不到路径，可点击界面上“运行日志”右上角的 📂 图标可直接打开。
     validations:
       required: true
@@ -43,7 +42,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: 软件版本截图
+      label: 版本信息截图
       description: 请提供 MaaEnd - 设置 - 调试 - 版本信息 截图。
     validations:
       required: true

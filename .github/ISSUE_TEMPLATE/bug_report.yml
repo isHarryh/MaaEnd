@@ -39,7 +39,7 @@ body:
     validations:
       required: true
 
-  - type: input
+  - type: textarea
     id: version
     attributes:
       label: 版本信息截图

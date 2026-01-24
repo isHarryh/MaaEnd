@@ -70,7 +70,8 @@
         "action": "Click",
         "next": [
             "RealTimeAutoSkipAllConfirm",
-            "RealTimeAutoSkipAll"
+            "RealTimeAutoSkipAll",
+            "RealTimeTaskMainDelay"
         ]
     },
     "RealTimeAutoSkipAllConfirm": {

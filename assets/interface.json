@@ -117,6 +117,13 @@
             "description": "点掉百科所有未读红点，**请在终末地百科首页开始任务**"
         },
         {
+            "name": "BakerEntry",
+            "label": "💬会话消息嘴替",
+            "entry": "BakerEntry",
+            "default_check": true,
+            "description": "清掉所有会话消息，聊个五毛钱的.jpg"
+        },
+        {
             "name": "ImportBluePrints",
             "label": "📐一键导入蓝图",
             "entry": "ImportBluePrints",

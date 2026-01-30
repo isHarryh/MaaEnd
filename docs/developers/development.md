@@ -6,6 +6,18 @@
 
 ## 本地运行
 
+### 自动设置
+
+我们提供一个自动化的工作区初始化脚本，只需执行：
+
+```bash
+python tools/setup_workspace.py
+```
+
+即可完整设置开发所需的环境。如果出现问题，你可以参照下方的手动设置指南来分步骤操作。
+
+### 手动设置
+
 1. 完整 clone 项目及子仓库。
 
     ```bash
@@ -14,10 +26,8 @@
 
     **不要漏了 `--recursive`**
 
-    或者
-
+    如果你已经 clone 了项目，但没有使用 `--recursive` 参数，现在你可以在项目的根目录执行
     ```bash
-    git clone https://github.com/MaaEnd/MaaEnd
     git submodule update --init --recursive
     ```
 
@@ -29,13 +39,19 @@
 
 3. 下载 [MaaFramework](https://github.com/MaaXYZ/MaaFramework/releases) 并解压 `bin` 内容到 `install/maafw/` 。
 4. 下载 [MXU](https://github.com/MistEO/MXU/releases) 并解压到 `install/` 。
-5. 运行 `install/mxu.exe`，且后续使用相关工具编辑、调试等，都基于 `install` 文件夹。
+
+### 后续开发
+
+直接运行 `install/mxu.exe`，且后续使用相关工具编辑、调试等，都基于 `install` 文件夹。
 
 > [!TIP]
+> 
 > MaaFramework 有丰富的 [开发工具](https://github.com/MaaXYZ/MaaFramework/tree/main?tab=readme-ov-file#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7) 可以进行低代码编辑、调试等，请善加使用。
 
-6. `resource` 等文件夹是链接状态，修改 `install` 等同于修改 `assets` 中的内容，无需额外复制。  
-   **但 `interface.json` 是复制的，若有修改需手动复制回 `assets` 再进行提交。**
+> [!NOTE]
+>
+> `resource` 等文件夹是链接状态，修改 `install` 等同于修改 `assets` 中的内容，无需额外复制。  
+> **但 `interface.json` 是复制的，若有修改需手动复制回 `assets` 再进行提交。**
 
 ## 代码规范
 

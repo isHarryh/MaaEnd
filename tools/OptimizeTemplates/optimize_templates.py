@@ -3,6 +3,7 @@ import json
 import os
 import pathlib
 import re
+import shlex
 import struct
 import subprocess
 from argparse import ArgumentParser
@@ -136,14 +137,16 @@ def update_png_with_oxipng(file_path: str, perfect_pngs: dict, quiet: bool):
     with Image.open(file_path) as img:
         img_before = np.array(img.convert("L"))
 
+    # Build oxipng command with proper escaping
+    escaped_file_path = shlex.escape(file_path)
     oxipng_cmd_base = ["oxipng", "-o", "max", "--fast", "-Z", "-s"]
     if quiet:
         oxipng_cmd_base.append("-q")
     
     # First pass
-    subprocess.run(oxipng_cmd_base + [file_path], check=True)
+    subprocess.run(oxipng_cmd_base + [escaped_file_path], check=True)
     # Second pass
-    subprocess.run(["oxipng", "-o", "2", "-s"] + (["-q"] if quiet else []) + [file_path], check=True)
+    subprocess.run(["oxipng", "-o", "2", "-s"] + (["-q"] if quiet else []) + [escaped_file_path], check=True)
 
     sz_after = os.stat(file_path).st_size
 

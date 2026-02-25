@@ -342,7 +342,7 @@ func ocrExtractNumberWithCenter(ctx *maa.Context, controller *maa.Controller, pi
 	}
 
 	// 优先从 Best 结果中提取，然后是 All
-	for _, results := range [][]*maa.RecognitionResult{detail.Results.Best, detail.Results.All} {
+	for _, results := range [][]*maa.RecognitionResult{{detail.Results.Best}, detail.Results.All} {
 		if len(results) > 0 {
 			if ocrResult, ok := results[0].AsOCR(); ok {
 				if num, success := extractNumbersFromText(ocrResult.Text); success {
@@ -399,7 +399,7 @@ func ocrExtractTextWithCenter(ctx *maa.Context, controller *maa.Controller, pipe
 	}
 
 	// 优先从 Filtered 结果中提取，然后是 Best、All
-	for _, results := range [][]*maa.RecognitionResult{detail.Results.Filtered, detail.Results.Best, detail.Results.All} {
+	for _, results := range [][]*maa.RecognitionResult{detail.Results.Filtered, {detail.Results.Best}, detail.Results.All} {
 		if len(results) > 0 {
 			if ocrResult, ok := results[0].AsOCR(); ok {
 				if containsKeyword(ocrResult.Text, keyword) {
@@ -486,7 +486,7 @@ func ocrAndParseQuota(ctx *maa.Context, controller *maa.Controller) (x int, y in
 		return x, y, hoursLater, b
 	}
 	if detail1 != nil && detail1.Results != nil {
-		for _, results := range [][]*maa.RecognitionResult{detail1.Results.Best, detail1.Results.All} {
+		for _, results := range [][]*maa.RecognitionResult{{detail1.Results.Best}, detail1.Results.All} {
 			if len(results) > 0 {
 				if ocrResult, ok := results[0].AsOCR(); ok && ocrResult.Text != "" {
 					log.Info().Msgf("Quota region 1 OCR: %s", ocrResult.Text)
@@ -512,7 +512,7 @@ func ocrAndParseQuota(ctx *maa.Context, controller *maa.Controller) (x int, y in
 		return x, y, hoursLater, b
 	}
 	if detail2 != nil && detail2.Results != nil {
-		for _, results := range [][]*maa.RecognitionResult{detail2.Results.Best, detail2.Results.All} {
+		for _, results := range [][]*maa.RecognitionResult{{detail2.Results.Best}, detail2.Results.All} {
 			if len(results) > 0 {
 				if ocrResult, ok := results[0].AsOCR(); ok && ocrResult.Text != "" {
 					log.Info().Msgf("Quota region 2 OCR: %s", ocrResult.Text)

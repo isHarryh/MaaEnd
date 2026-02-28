@@ -67,9 +67,8 @@
             }
         },
         "next": [
-            "[JumpBack]YellowConfirmButtonType1Slow",
-            "CloseButtonType1",
-            "ExitRecoveryEmotion"
+            "[JumpBack]YellowConfirmButtonType1",
+            "CloseButtonType1"
         ]
     },
     "YellowConfirmButtonType1Slow": {

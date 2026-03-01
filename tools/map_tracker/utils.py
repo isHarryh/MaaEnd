@@ -85,6 +85,10 @@ class MapName:
         return self._tile_y
 
     @property
+    def tier_suffix(self) -> str | None:
+        return self._tier_suffix
+
+    @property
     def map_full_name(self) -> str:
         if self._map_type == "tier":
             if not self._tier_suffix:

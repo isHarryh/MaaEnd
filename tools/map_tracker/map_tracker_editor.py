@@ -881,6 +881,13 @@ def unique_map_key(name: str) -> str:
     """Normalize map name for semantic comparison."""
     try:
         parsed = MapName.parse(name)
+        if parsed.map_type == "tier":
+            if not parsed.tier_suffix:
+                return f"{parsed.map_type}:{parsed.map_id}:{parsed.map_level_id}"
+            return (
+                f"{parsed.map_type}:{parsed.map_id}:"
+                f"{parsed.map_level_id}:{parsed.tier_suffix}"
+            )
         return f"{parsed.map_type}:{parsed.map_id}:{parsed.map_level_id}"
     except ValueError:
         basename = os.path.basename(name.replace("\\", "/"))

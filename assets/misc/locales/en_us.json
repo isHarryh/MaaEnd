@@ -234,7 +234,7 @@
     "task.ClaimSimulationRewards.success_finished": "Simulation  rewards claimed successfully.",
     "option.ClaimSimulationArea.label": "Area",
     "task.ItemTransfer.label": "🐌 Inventory Transfer",
-    "task.ItemTransfer.description": "Batch transfer specified items between different regions. Please start the task after finding the static dark background on Dijiang. Recommended: raise the camera to maximum at the Reception Room teleport point, using the ceiling as background.",
+    "task.ItemTransfer.description": "Batch transfer specified items between different regions. At the Dijiang Reception Room teleport point, raise the camera to the highest and use the ceiling as background.",
     "task.ItemTransfer.item_not_found": "Failed to find target item, scrolled back to top but recognition failed",
     "task.ItemTransfer.bag_return_completed": "Destination warehouse is full, remaining items have been returned to origin warehouse",
     "option.ItemTransferWhatToTransfer.label": "Item to Transfer",

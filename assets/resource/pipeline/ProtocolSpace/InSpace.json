@@ -240,7 +240,7 @@
             "ProtocolSpaceRewardDontUsePermit",
             "ProtocolSpaceRewardClaim"
         ]
-    },    
+    },
     "ProtocolSpaceRewardDontUsePermit": {
         "desc": "协议空间奖励界面不使用许可",
         "recognition": "OCR",

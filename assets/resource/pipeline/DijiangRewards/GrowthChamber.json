@@ -37,9 +37,7 @@
                 "box_index": 1
             }
         },
-        "post_delay": 0,
         "pre_delay": 0,
-        "rate_limit": 0,
         "action": {
             "type": "Click"
         },
@@ -47,6 +45,8 @@
             "time": 150,
             "timeout": 2000
         },
+        "post_delay": 0,
+        "rate_limit": 0,
         "next": [
             "ClaimAllGrowRewardClose"
         ]
@@ -60,16 +60,16 @@
                 ]
             }
         },
-        "post_delay": 0,
-        "pre_delay": 0,
-        "rate_limit": 0,
         "pre_wait_freezes": {
             "time": 80,
             "timeout": 1000
         },
+        "pre_delay": 0,
         "action": {
             "type": "Click"
         },
+        "post_delay": 0,
+        "rate_limit": 0,
         "next": [
             "Grow",
             "ExitGrowthChamber"
@@ -92,9 +92,7 @@
                 ]
             }
         },
-        "post_delay": 0,
         "pre_delay": 0,
-        "rate_limit": 0,
         "action": {
             "type": "Click"
         },
@@ -102,6 +100,8 @@
             "time": 150,
             "timeout": 2000
         },
+        "post_delay": 0,
+        "rate_limit": 0,
         "next": [
             "InGrow"
         ]
@@ -222,8 +222,8 @@
                 ]
             }
         },
-        "post_delay": 0,
         "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": [
             "ExitGrowthChamber"
@@ -245,8 +245,8 @@
                 ]
             }
         },
-        "post_delay": 0,
         "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": [
             "GrayCancelButton"
@@ -417,12 +417,12 @@
                 ]
             }
         },
-        "post_delay": 0,
         "pre_delay": 0,
-        "rate_limit": 0,
         "action": {
             "type": "Click"
         },
+        "post_delay": 0,
+        "rate_limit": 0,
         "next": [
             "ChooseSortBy",
             "[JumpBack]SwipeChooseSortBy"
@@ -447,12 +447,12 @@
                 ]
             }
         },
-        "post_delay": 0,
         "pre_delay": 0,
-        "rate_limit": 0,
         "action": {
             "type": "Click"
-        }
+        },
+        "post_delay": 0,
+        "rate_limit": 0
     },
     "SwipeChooseSortBy": {
         "desc": "选择排序方式时候滚动一次",
@@ -474,15 +474,15 @@
                 ]
             }
         },
-        "post_delay": 0,
         "pre_delay": 0,
-        "rate_limit": 0,
         "action": {
             "type": "Scroll",
             "param": {
                 "dx": 120
             }
-        }
+        },
+        "post_delay": 0,
+        "rate_limit": 0
     },
     "SortOrder": {
         "desc": "排序,选择正序或者倒序",
@@ -504,12 +504,12 @@
                 ]
             }
         },
-        "post_delay": 0,
         "pre_delay": 0,
-        "rate_limit": 0,
         "action": {
             "type": "Click"
-        }
+        },
+        "post_delay": 0,
+        "rate_limit": 0
     },
     "ExitGrowthChamber": {
         "desc": "[培养舱·离开] 返回控制中枢",

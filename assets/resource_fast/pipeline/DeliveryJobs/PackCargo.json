@@ -24,7 +24,6 @@
             "パッキング",
             "화물 포장"
         ],
-        "order_by": "Expected",
         "next": [
             "DeliveryJobsSelectTypeOfGoodsToPackNextStep"
         ]
@@ -45,7 +44,6 @@
             "取引申請",
             "관리 신청"
         ],
-        "order_by": "Expected",
         "next": [
             "DeliveryJobsOngoingDelivery",
             "DeliveryJobsRedistributionBidNextStep"

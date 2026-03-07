@@ -276,8 +276,7 @@
             26
         ],
         "expected": "好友",
-        "threshold": 0.8,
-        "order_by": "Expected"
+        "threshold": 0.8
     },
     "ResellROIDetailCostPrice": {
         "desc": "商品详情页成本价格区域",
@@ -291,8 +290,7 @@
         "expected": "[0-9]+",
         "only_rec": true,
         "color_filter": "ResellROITextColorGrey",
-        "threshold": 0.8,
-        "order_by": "Expected"
+        "threshold": 0.8
     },
     "ResellROIFriendSalePrice": {
         "desc": "好友出售价格区域",
@@ -307,7 +305,6 @@
         "only_rec": true,
         "color_filter": "ResellROITextColorGrey",
         "threshold": 0.8,
-        "order_by": "Expected",
         "action": "DoNothing",
         "next": []
     },
@@ -321,8 +318,7 @@
             30
         ],
         "expected": "(\\d+)/(\\d+)",
-        "threshold": 0.3,
-        "order_by": "Expected"
+        "threshold": 0.3
     },
     "ResellROIQuotaNextAddHours": {
         "desc": "下次增加配额区域 - 小时格式 (a小时后+b)",
@@ -334,8 +330,7 @@
             30
         ],
         "expected": "(\\d+)\\s*小时.*?[+]\\s*(\\d+)",
-        "threshold": 0.3,
-        "order_by": "Expected"
+        "threshold": 0.3
     },
     "ResellROIQuotaNextAddMinutes": {
         "desc": "下次增加配额区域 - 分钟格式 (a分钟后+b)",
@@ -347,8 +342,7 @@
             30
         ],
         "expected": "(\\d+)\\s*分钟.*?[+]\\s*(\\d+)",
-        "threshold": 0.3,
-        "order_by": "Expected"
+        "threshold": 0.3
     },
     "ResellROIQuotaNextAddFallback": {
         "desc": "下次增加配额区域 - 兜底格式 (+b)",
@@ -360,8 +354,7 @@
             30
         ],
         "expected": "[+]\\s*(\\d+)",
-        "threshold": 0.3,
-        "order_by": "Expected"
+        "threshold": 0.3
     },
     "ResellROIFriendLoading": {
         "desc": "好友加载中区域",
@@ -374,7 +367,6 @@
         ],
         "expected": "加载中",
         "threshold": 0.85,
-        "order_by": "Expected",
         "action": "DoNothing",
         "next": [
             "ResellROIFriendSalePrice",

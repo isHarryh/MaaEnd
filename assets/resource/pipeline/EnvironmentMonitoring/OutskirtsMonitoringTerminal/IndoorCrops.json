@@ -29,8 +29,7 @@
             "Indoor Crops",
             "室内の作物",
             "실내 작물"
-        ],
-        "order_by": "Expected"
+        ]
     },
     "CheckIndoorCropsReadyText": {
         "desc": "检查室内作物委托是否准备好",
@@ -55,8 +54,7 @@
             "Go to Mission",
             "任務へ",
             "임무로 이동하기"
-        ],
-        "order_by": "Expected"
+        ]
     },
     "CheckIndoorCropsJob": {
         "desc": "检查室内作物委托是否可以接取",
@@ -74,8 +72,7 @@
             "Accept Job",
             "引き受ける",
             "의뢰 수령"
-        ],
-        "order_by": "Expected"
+        ]
     },
     "CheckIndoorCropsGoToMissionText": {
         "desc": "检查室内作物委托是否可以前往",
@@ -93,8 +90,7 @@
             "Go to Mission",
             "任務へ",
             "임무로 이동하기"
-        ],
-        "order_by": "Expected"
+        ]
     },
     "InIndoorCropsMission": {
         "desc": "是否在室内作物任务界面",
@@ -111,8 +107,7 @@
             "Indoor Crops",
             "室内の作物",
             "실내 작물"
-        ],
-        "order_by": "Expected"
+        ]
     },
     "AcceptIndoorCrops": {
         "desc": "接取室内作物委托",

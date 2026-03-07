@@ -29,8 +29,7 @@
             "Rainbow Fin",
             "七色鱗獣",
             "무지개 린수"
-        ],
-        "order_by": "Expected"
+        ]
     },
     "CheckRainbowFinReadyText": {
         "desc": "检查七彩鳞委托是否准备好",
@@ -55,8 +54,7 @@
             "Go to Mission",
             "任務へ",
             "임무로 이동하기"
-        ],
-        "order_by": "Expected"
+        ]
     },
     "CheckRainbowFinJob": {
         "desc": "检查七彩鳞委托是否可以接取",
@@ -74,8 +72,7 @@
             "Accept Job",
             "引き受ける",
             "의뢰 수령"
-        ],
-        "order_by": "Expected"
+        ]
     },
     "CheckRainbowFinGoToMissionText": {
         "desc": "检查七彩鳞委托是否可以前往",
@@ -93,8 +90,7 @@
             "Go to Mission",
             "任務へ",
             "임무로 이동하기"
-        ],
-        "order_by": "Expected"
+        ]
     },
     "InRainbowFinMission": {
         "desc": "是否在七彩鳞任务界面",
@@ -111,8 +107,7 @@
             "Rainbow Fin",
             "七色鱗獣",
             "무지개 린수"
-        ],
-        "order_by": "Expected"
+        ]
     },
     "AcceptRainbowFin": {
         "desc": "接取七彩鳞委托",

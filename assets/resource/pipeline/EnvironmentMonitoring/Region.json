@@ -21,8 +21,7 @@
             "Outskirts Monitoring Terminal",
             "郊外観測端末",
             "교외 관측 단말기"
-        ],
-        "order_by": "Expected"
+        ]
     },
     "EnvironmentMonitoringEnterOutskirtsMonitoringTerminal": {
         "desc": "进入城郊监测终端",

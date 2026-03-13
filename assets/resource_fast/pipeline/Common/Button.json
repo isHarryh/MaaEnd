@@ -957,7 +957,6 @@
         }
     },
 
-
     "CloseRewardsButton": {
         "desc": "关闭奖励界面按钮，位于界面中部偏下，无文字，对号标志",
         "recognition": {

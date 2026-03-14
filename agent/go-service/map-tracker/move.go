@@ -139,7 +139,8 @@ func (a *MapTrackerMove) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 	// For each target point
 	for i, target := range param.Path {
 		targetX, targetY := target[0], target[1]
-		enableFineApproach := shouldEnableFineApproach(param.FineApproach, i, len(param.Path))
+		enableFineApproach := (param.FineApproach == FINE_APPROACH_ALL_TARGETS) ||
+			(param.FineApproach == FINE_APPROACH_FINAL_TARGET && i == len(param.Path)-1)
 		inFineApproach := false
 		log.Info().Int("index", i).Float64("targetX", targetX).Float64("targetY", targetY).Msg("Navigating to next target point")
 
@@ -460,17 +461,6 @@ func (a *MapTrackerMove) parseParam(paramStr string) (*MapTrackerMoveParam, erro
 	}
 
 	return &param, nil
-}
-
-func shouldEnableFineApproach(mode string, targetIndex int, totalTargets int) bool {
-	switch mode {
-	case FINE_APPROACH_ALL_TARGETS:
-		return true
-	case FINE_APPROACH_FINAL_TARGET:
-		return targetIndex == totalTargets-1
-	default:
-		return false
-	}
 }
 
 func doEmergencyStop(aw *ActionWrapper, noPrint bool) {

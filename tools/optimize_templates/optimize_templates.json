@@ -519,5 +519,12 @@
     "resource/image/Common/Button/ShutterButton": "eda5e068d9fa4940d7efb73f4c3017c07cf979e01d43fdd82db6a1798085a773",
     "resource/image/Common/Button/WhiteConfirmButtonType2": "217d142d60c81669aa93f82ddf1271b299876cf0dbe6bec7697df44218830dba",
     "resource/image/DeliveryJobs/YazhenPowder": "7b2c1d54d1f6815dba93327efe5a8b358a77e3602f370bf133491716d2b56848",
-    "resource/image/DeliveryJobs/JincaoPowder": "36fc1a38c6083019ef96d0465dcd55c38caea08d766b123cd026b5d186ea7b7d"
+    "resource/image/DeliveryJobs/JincaoPowder": "36fc1a38c6083019ef96d0465dcd55c38caea08d766b123cd026b5d186ea7b7d",
+    "resource/image/EssenceFilter/LockButtonLocked": "67de529c80f307dfb09cb414cddd8d7c55b5aef29881e9f9075cd46704c7822c",
+    "resource/image/EssenceFilter/DiscardButtonDiscarded": "cec86a1db59fab17114fc72f9dff466ea80c5e7b5bcc1d2ad33238f4bcd077bf",
+    "resource/image/EssenceFilter/EssenceWeapon": "2cfef8b53534a8955fc3c73822aa5cec097508fe8872a6c56fc4a54b3566ffb6",
+    "resource/image/EssenceFilter/LockButton": "b45b2806ab095df48cddcdaf4ceba41683a80b9be0f581b70665717d2e78bdb9",
+    "resource/image/EssenceFilter/DiscardButton": "e4e303827d4068b6b01ad73bef9abef41b8b0068d15586daf670f9e14c3b655c",
+    "resource/image/EssenceFilter/EssenceGeneral": "b0e1dc8e0c270eac546accc885bf2aa0e2706765ee8c83083ff125cb96ee6240",
+    "resource/image/EssenceFilter/EssenceSlot": "e158492fae033dd40f745e4ec8f151a487e74b7204e08ce56e0cdb8ed8096b40"
 }

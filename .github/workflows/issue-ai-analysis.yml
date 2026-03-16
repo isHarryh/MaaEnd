@@ -25,9 +25,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Copilot CLI
-        run: npm install -g @github/copilot
-
       - name: Determine issue number
         id: issue_number
         run: |
@@ -50,6 +47,9 @@ jobs:
             感谢您的反馈！系统正在自动分析该问题，预计耗时约 10 分钟。  
             您可以在此查看进度：🔗 [GitHub Action 运行记录](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
           token: ${{ secrets.MAAEND_BOT_TOKEN }}
+
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot
 
       # 步骤 2：执行 AI 分析，生成结果文件 copilot_answer.md
       # 注意需搭配 issue 分析 skill 使用: https://github.com/MaaEnd/MaaEnd/blob/v2/.claude/skills/maaend-issue-log-analysis/SKILL.md

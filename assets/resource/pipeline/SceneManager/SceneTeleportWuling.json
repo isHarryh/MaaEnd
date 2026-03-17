@@ -2060,8 +2060,7 @@
                 694,
                 914
             ],
-            "on_find": "Click",
-            "disable_auto_open_map": true
+            "on_find": "Click"
         },
         "anchor": {
             "__ScenePrivateMapMapTrackerBigMapPickAnchor": ""

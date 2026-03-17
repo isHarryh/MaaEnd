@@ -32,8 +32,6 @@ type MapTrackerBigMapPickParam struct {
 	Target [2]float64 `json:"target"`
 	// OnFind controls behavior when target enters viewport. Valid values: "Click", "Teleport", "DoNothing".
 	OnFind string `json:"on_find,omitempty"`
-	// DisableAutoOpenMap controls whether to skip auto-running scene_manager_node before picking.
-	DisableAutoOpenMap bool `json:"disable_auto_open_map,omitempty"`
 }
 
 var _ maa.CustomActionRunner = &MapTrackerBigMapPick{}
@@ -51,14 +49,14 @@ func (a *MapTrackerBigMapPick) Run(ctx *maa.Context, arg *maa.CustomActionArg) b
 		log.Error().Err(err).Str("map", param.MapName).Msg("Failed to resolve scene manager mapping")
 		return false
 	}
-	if hasSceneMapping && !param.DisableAutoOpenMap {
+	if hasSceneMapping && param.OnFind == "Teleport" {
 		if _, err := ctx.RunTask(sceneManagerNode); err != nil {
 			log.Error().Err(err).Str("map", param.MapName).Str("sceneManagerNode", sceneManagerNode).Msg("Failed to run scene manager node")
 			return false
 		}
-		log.Info().Str("map", param.MapName).Str("sceneManagerNode", sceneManagerNode).Msg("Scene manager node completed before big-map pick")
+		log.Info().Str("map", param.MapName).Str("sceneManagerNode", sceneManagerNode).Str("onFind", param.OnFind).Msg("Scene manager node completed before big-map pick")
 	} else if hasSceneMapping {
-		log.Info().Str("map", param.MapName).Str("sceneManagerNode", sceneManagerNode).Msg("Auto-open map is disabled; skipping scene manager node")
+		log.Info().Str("map", param.MapName).Str("sceneManagerNode", sceneManagerNode).Str("onFind", param.OnFind).Msg("Skipping scene manager node because on_find is not Teleport")
 	}
 
 	if param.OnFind == "Teleport" {

@@ -113,9 +113,7 @@ Required parameters:
 
 Optional parameters:
 
-- `on_find`: Action after the target point enters the viewport. Can be `"Click"`, `"Teleport"`, or `"DoNothing"`. Default is `"Click"`.
-
-- `disable_auto_open_map`: Boolean, default `false`. Whether to disable auto-opening the corresponding map screen.
+- `on_find`: Action after the target point enters the viewport. Can be `"Click"`, `"Teleport"`, or `"DoNothing"`. Default is `"Click"`. When set to `"Teleport"`, MapTrackerBigMapPick will automatically enter the map scene.
 
 #### Example Usage
 

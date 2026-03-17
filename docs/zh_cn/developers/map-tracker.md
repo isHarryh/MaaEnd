@@ -114,9 +114,7 @@
 
 可选参数：
 
-- `on_find`: 找到目标点后执行的操作。可以是 `"Click"`、`"Teleport"` 或 `"DoNothing"`，默认 `"Click"`。
-
-- `disable_auto_open_map`: 真假值，默认 `false`。是否禁用自动打开对应场景的地图界面的功能。
+- `on_find`: 找到目标点后执行的操作。可以是 `"Click"`、`"Teleport"` 或 `"DoNothing"`，默认 `"Click"`。当设置为 `"Teleport"` 时，MapTrackerBigMapPick 会自动进入到对应的大地图界面。
 
 #### 示例用法
 

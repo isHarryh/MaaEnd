@@ -27,8 +27,9 @@ jobs:
       issues: write
     steps:
       # 这个 action 只负责编排，分析质量仍依赖配套的 issue/log analysis skill。
+      # 详细使用文档：https://github.com/MistEO/ai-issue-analysis
       # 最佳实践参考：
-      # - https://github.com/MaaEnd/MaaEnd/blob/ci/prompt/.claude/skills/maaend-issue-log-analysis/SKILL.md
+      # - https://github.com/MaaEnd/MaaEnd/blob/v2/.claude/skills/maaend-issue-log-analysis/SKILL.md
       # - https://github.com/MaaAssistantArknights/MaaAssistantArknights/blob/dev-v2/.claude/skills/maa-issue-log-analysis/SKILL.md
       - name: Analyze issue with AI
         id: analysis

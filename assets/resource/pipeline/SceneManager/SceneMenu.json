@@ -602,8 +602,8 @@
                 "expected": [
                     "好友",
                     "Friends",
-                    "FRIENDS",
                     "フレンド",
+                    "FRIENDS",
                     "친구"
                 ]
             }

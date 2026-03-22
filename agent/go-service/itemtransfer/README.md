@@ -47,16 +47,17 @@ NND 检测仅用于获取坐标框架。由于目标物品没有 NND class，NND
 
 依赖 `item_order.json` 中 `category_order` 提供的物品排序（按游戏内升序排列）。Fallback 和 OCR 直查共用此逻辑。
 
-1. 将当前页面所有格子排成一维序列（从左到右、从上到下）
-2. 取中间格子，悬停 1s 后 OCR tooltip 物品名
-3. 在 `category_order` 中查找 OCR 结果的索引 `ocrIdx` 和目标物品的索引 `targetIdx`
-4. `ocrIdx < targetIdx` → 搜索右半区（`lo = mid + 1`）
-5. `ocrIdx > targetIdx` → 搜索左半区（`hi = mid - 1`）
-6. `lo > hi` → 没有格子可查，返回失败
+1. **固定从第一个格子（左上角）开始**：悬停 1s 后 OCR tooltip 物品名
+2. 若第一个格子已经超过目标（`ocrIdx > targetIdx`）→ 目标不在当前页面，立即返回失败
+3. 否则在 `[1, len-1]` 范围内进行标准二分搜索，固定向后收敛
+4. 每次取 `mid = (lo + hi) / 2`，OCR 后比较 `ocrIdx` 与 `targetIdx`
+5. `ocrIdx < targetIdx` → `lo = mid + 1`（向后推进）
+6. `ocrIdx > targetIdx` → `hi = mid - 1`（从右侧收窄）
+7. `lo > hi` → 范围耗尽，返回失败
 
 ### OCR 失败时的方向决策
 
-当 OCR 结果为空、包含 "已盛装"、或物品名不在 `category_order` 中时，根据 `targetIdx` 在 `categoryOrder` 中的比例估算目标在格子中的大致位置，向该位置方向收敛。
+当 OCR 结果为空、包含 "已盛装"、或物品名不在 `category_order` 中时，固定向后推进（`lo = mid + 1`），不做反向回退。
 
 ### 降序处理
 

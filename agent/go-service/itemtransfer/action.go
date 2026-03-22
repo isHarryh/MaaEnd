@@ -329,11 +329,40 @@ func cleanOCRNoise(s string) string {
 }
 
 // binarySearchOnPage searches among visible grid cells.
-// OCRs the middle cell, checks its position in categoryOrder vs target position,
-// then narrows the grid cell range accordingly.
-// Returns the target item if found, or nil when no more cells to check (lo > hi).
+// Always starts from cell 0 (top-left) to establish a baseline, then
+// converges forward via binary search on the remaining range.
+// Returns the target item if found, or nil when the range is exhausted.
 func binarySearchOnPage(ctx *maa.Context, tasker *maa.Tasker, ctrl *maa.Controller, items []gridItem, categoryOrder []string, targetIdx int, targetName string) *gridItem {
-	lo, hi := 0, len(items)-1
+	if len(items) == 0 {
+		return nil
+	}
+
+	if tasker.Stopping() {
+		return nil
+	}
+
+	first := &items[0]
+	name := hoverAndOCR(ctx, tasker, ctrl, first.CenterX, first.CenterY)
+
+	if matchesTarget(name, targetName) {
+		log.Info().Str("component", componentName).Str("ocr_name", name).Int("grid_idx", 0).Msg("found target at first cell")
+		return first
+	}
+
+	if name != "" {
+		ocrIdx := indexOf(categoryOrder, name)
+		if ocrIdx < 0 {
+			ocrIdx = fuzzyIndexOf(categoryOrder, name)
+		}
+		if ocrIdx >= 0 && ocrIdx > targetIdx {
+			log.Info().Str("component", componentName).
+				Str("ocr_name", name).Int("ocr_idx", ocrIdx).Int("target_idx", targetIdx).
+				Msg("first cell already past target, item not on this page")
+			return nil
+		}
+	}
+
+	lo, hi := 1, len(items)-1
 
 	for lo <= hi {
 		if tasker.Stopping() {
@@ -343,22 +372,15 @@ func binarySearchOnPage(ctx *maa.Context, tasker *maa.Tasker, ctrl *maa.Controll
 		mid := (lo + hi) / 2
 		item := &items[mid]
 
-		name := hoverAndOCR(ctx, tasker, ctrl, item.CenterX, item.CenterY)
+		name = hoverAndOCR(ctx, tasker, ctrl, item.CenterX, item.CenterY)
 		if name == "" {
-			estimatedGridPos := len(items) * targetIdx / max(len(categoryOrder), 1)
-			if estimatedGridPos <= mid {
-				hi = mid - 1
-			} else {
-				lo = mid + 1
-			}
+			lo = mid + 1
 			continue
 		}
 
 		if matchesTarget(name, targetName) {
-			log.Info().
-				Str("component", componentName).
-				Str("ocr_name", name).
-				Int("grid_idx", mid).
+			log.Info().Str("component", componentName).
+				Str("ocr_name", name).Int("grid_idx", mid).
 				Msg("binary search found target")
 			return item
 		}
@@ -368,29 +390,16 @@ func binarySearchOnPage(ctx *maa.Context, tasker *maa.Tasker, ctrl *maa.Controll
 			ocrIdx = fuzzyIndexOf(categoryOrder, name)
 		}
 		if ocrIdx < 0 {
-			estimatedGridPos := len(items) * targetIdx / max(len(categoryOrder), 1)
-			if estimatedGridPos <= mid {
-				hi = mid - 1
-			} else {
-				lo = mid + 1
-			}
-			log.Warn().
-				Str("component", componentName).
-				Str("ocr_name", name).
-				Int("mid", mid).
-				Int("estimated_pos", estimatedGridPos).
-				Msg("OCR'd item not in category order, biasing toward target")
+			lo = mid + 1
+			log.Warn().Str("component", componentName).
+				Str("ocr_name", name).Int("mid", mid).
+				Msg("OCR'd item not in category order, advancing forward")
 			continue
 		}
 
-		log.Info().
-			Str("component", componentName).
-			Str("ocr_name", name).
-			Int("ocr_idx", ocrIdx).
-			Int("target_idx", targetIdx).
-			Int("lo", lo).
-			Int("hi", hi).
-			Int("mid", mid).
+		log.Info().Str("component", componentName).
+			Str("ocr_name", name).Int("ocr_idx", ocrIdx).Int("target_idx", targetIdx).
+			Int("lo", lo).Int("hi", hi).Int("mid", mid).
 			Msg("binary search narrowing grid range")
 
 		if ocrIdx < targetIdx {
@@ -400,10 +409,9 @@ func binarySearchOnPage(ctx *maa.Context, tasker *maa.Tasker, ctrl *maa.Controll
 		}
 	}
 
-	log.Info().
-		Str("component", componentName).
+	log.Info().Str("component", componentName).
 		Int("target_idx", targetIdx).
-		Msg("no adjacent grid cells remaining, binary search exhausted")
+		Msg("binary search exhausted, target not found")
 	return nil
 }
 

@@ -55,10 +55,7 @@ func (a *ItemTransferFallbackAction) Run(ctx *maa.Context, arg *maa.CustomAction
 
 	targetIdx := indexOf(categoryOrder, itemInfo.Name)
 
-	side := params.Side
-	if side == "" {
-		side = "repo"
-	}
+	side := inferSide(params.Side, arg.CurrentTaskName)
 
 	nndNode := repoNNDNode
 	if side == "bag" {

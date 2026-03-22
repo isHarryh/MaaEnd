@@ -169,6 +169,48 @@
                     }
                 },
                 {
+                    "name": "中容武陵电池",
+                    "label": "$item.MCWulingBattery",
+                    "pipeline_override": {
+                        "ItemTransferClickItemCategory": {
+                            "template": "ItemTransfer/Product.png"
+                        },
+                        "ItemTransferRepoToBag": {
+                            "next": [
+                                "ItemTransferClickSortDescending",
+                                "ItemTransferClickItemCategory",
+                                "ItemTransferFindItemWithOCR"
+                            ]
+                        },
+                        "ItemTransferBagToRepo": {
+                            "next": [
+                                "ItemTransferFindItemWithOCRBag"
+                            ]
+                        },
+                        "ItemTransferBagToOriginRepo": {
+                            "next": [
+                                "ItemTransferFindItemWithOCRBagReturn"
+                            ]
+                        },
+                        "ItemTransferFindItemWithOCR": {
+                            "custom_action_param": {
+                                "item_name": "中容武陵电池",
+                                "descending": true
+                            }
+                        },
+                        "ItemTransferFindItemWithOCRBag": {
+                            "custom_action_param": {
+                                "item_name": "中容武陵电池"
+                            }
+                        },
+                        "ItemTransferFindItemWithOCRBagReturn": {
+                            "custom_action_param": {
+                                "item_name": "中容武陵电池"
+                            }
+                        }
+                    }
+                },
+                {
                     "name": "源矿",
                     "label": "$item.OriginiumOre",
                     "pipeline_override": {

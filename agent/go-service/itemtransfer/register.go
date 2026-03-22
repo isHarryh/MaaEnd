@@ -9,4 +9,8 @@ func Register() {
 		"ItemTransferFallbackAction",
 		&ItemTransferFallbackAction{},
 	)
+	maa.AgentServerRegisterCustomAction(
+		"ItemTransferOCRAction",
+		&ItemTransferOCRAction{},
+	)
 }

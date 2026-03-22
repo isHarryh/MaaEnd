@@ -132,3 +132,15 @@ func fileExists(p string) bool {
 	_, err := os.Stat(p)
 	return err == nil
 }
+
+// inferSide returns the side from params if set, otherwise infers from the
+// pipeline node name: nodes containing "Bag" operate on the bag area.
+func inferSide(paramSide, taskName string) string {
+	if paramSide != "" {
+		return paramSide
+	}
+	if strings.Contains(taskName, "Bag") {
+		return "bag"
+	}
+	return "repo"
+}

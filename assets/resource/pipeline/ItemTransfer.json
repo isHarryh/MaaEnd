@@ -692,6 +692,44 @@
             ".*"
         ]
     },
+    "ItemTransferFindItemWithOCR": {
+        "desc": "无 NND expected 时通过 OCR 二分法查找物品并 Ctrl+Click（仓库侧）",
+        "action": "Custom",
+        "custom_action": "ItemTransferOCRAction",
+        "custom_action_param": {
+            "item_name": "",
+            "side": "repo"
+        },
+        "next": [
+            "ItemTransferSwitchRepoToDestination"
+        ]
+    },
+    "ItemTransferFindItemWithOCRBag": {
+        "desc": "无 NND expected 时通过 OCR 二分法查找物品并 Ctrl+Click（背包侧）",
+        "action": "Custom",
+        "custom_action": "ItemTransferOCRAction",
+        "custom_action_param": {
+            "item_name": "",
+            "side": "bag"
+        },
+        "next": [
+            "ItemTransferCheckIfFull",
+            "ItemTransferSwitchRepoToOrigin",
+            "ItemTransferStop"
+        ]
+    },
+    "ItemTransferFindItemWithOCRBagReturn": {
+        "desc": "无 NND expected 时通过 OCR 二分法查找物品并 Ctrl+Click（背包返还侧）",
+        "action": "Custom",
+        "custom_action": "ItemTransferOCRAction",
+        "custom_action_param": {
+            "item_name": "",
+            "side": "bag"
+        },
+        "focus": {
+            "Node.Action.Succeeded": "$task.ItemTransfer.bag_return_completed"
+        }
+    },
     "ItemTransferFindItemFallback": {
         "desc": "NND 兜底：hover + OCR + 二分法查找（仓库侧）",
         "action": "Custom",

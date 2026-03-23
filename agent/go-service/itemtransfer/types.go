@@ -42,10 +42,10 @@ const (
 	bagNNDNode     = "ItemTransferDetectAllItemsBag"
 	tooltipOCRNode = "ItemTransferTooltipOCR"
 
-	tooltipOffsetX = 15
-	tooltipOffsetY = 0
-	tooltipWidth   = 155
-	tooltipHeight  = 70
+	tooltipOffsetX = 31
+	tooltipOffsetY = 6
+	tooltipWidth   = 117
+	tooltipHeight  = 58
 )
 
 var (

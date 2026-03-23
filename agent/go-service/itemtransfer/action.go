@@ -459,13 +459,11 @@ func linearScanOnPage(ctx *maa.Context, tasker *maa.Tasker, ctrl *maa.Controller
 
 func ctrlClick(ctrl *maa.Controller, x, y int) bool {
 	ctrl.PostKeyDown(17).Wait()
-	time.Sleep(500 * time.Millisecond)
+	time.Sleep(50 * time.Millisecond)
 
-	ctrl.PostTouchDown(0, int32(x), int32(y), 1).Wait()
-	time.Sleep(100 * time.Millisecond)
-	ctrl.PostTouchUp(0).Wait()
+	ctrl.PostClick(int32(x), int32(y)).Wait()
 
-	time.Sleep(500 * time.Millisecond)
+	time.Sleep(50 * time.Millisecond)
 	ctrl.PostKeyUp(17).Wait()
 
 	log.Info().

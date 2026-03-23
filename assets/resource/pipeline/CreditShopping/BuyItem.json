@@ -4,90 +4,87 @@
         "desc": "识别购买商品(优先购买)",
         "recognition": "OCR",
         "roi": [
-            58,
-            55,
-            330,
-            164
+            146,
+            69,
+            241,
+            150
         ],
         "expected": [
-            "购买商品",
-            "購買商品",
-            "(?i)Purchase",
-            "購入"
+            "购买商品"
         ],
         "next": [
-            "CreditShoppingBuyFirstItemOCR_Oroberyl",
             "CreditShoppingBuyFirstItemOCR_ArsenalTicket",
+            "CreditShoppingBuyFirstItemOCR_Oroberyl",
             "CreditShoppingBuyFirstItemOCR_TCreds",
-            "CreditShoppingBuyFirstItemOCR_ElementaryCognitiveCarrier",
             "CreditShoppingBuyFirstItemOCR_ElementaryCombatRecord",
             "CreditShoppingBuyFirstItemOCR_IntermediateCombatRecord",
-            "CreditShoppingBuyFirstItemOCR_CastDie",
-            "CreditShoppingBuyFirstItemOCR_HeavyCastDie",
+            "CreditShoppingBuyFirstItemOCR_ElementaryCognitiveCarrier",
             "CreditShoppingBuyFirstItemOCR_ArmsInspector",
             "CreditShoppingBuyFirstItemOCR_ArmsINSPKit",
-            "CreditShoppingBuyFirstItemOCR_Protohedron",
-            "CreditShoppingBuyFirstItemOCR_Protoprism"
+            "CreditShoppingBuyFirstItemOCR_CastDie",
+            "CreditShoppingBuyFirstItemOCR_HeavyCastDie",
+            "CreditShoppingBuyFirstItemOCR_Protodisk",
+            "CreditShoppingBuyFirstItemOCR_Protoset",
+            "CreditShoppingBuyFirstItemOCR_Protoprism",
+            "CreditShoppingBuyFirstItemOCR_Protohedron"
         ]
     },
     "CreditShoppingBuyNormalItemWithDiscount": {
         "desc": "识别购买商品(有折扣)",
         "recognition": "OCR",
         "roi": [
-            58,
-            55,
-            330,
-            164
+            146,
+            69,
+            241,
+            150
         ],
         "expected": [
-            "购买商品",
-            "購買商品",
-            "(?i)Purchase",
-            "購入"
+            "购买商品"
         ],
         "next": [
-            "CreditShoppingBuyNormalItemWithDiscountOCR_Oroberyl",
             "CreditShoppingBuyNormalItemWithDiscountOCR_ArsenalTicket",
+            "CreditShoppingBuyNormalItemWithDiscountOCR_Oroberyl",
             "CreditShoppingBuyNormalItemWithDiscountOCR_TCreds",
-            "CreditShoppingBuyNormalItemWithDiscountOCR_ElementaryCognitiveCarrier",
             "CreditShoppingBuyNormalItemWithDiscountOCR_ElementaryCombatRecord",
             "CreditShoppingBuyNormalItemWithDiscountOCR_IntermediateCombatRecord",
-            "CreditShoppingBuyNormalItemWithDiscountOCR_CastDie",
-            "CreditShoppingBuyNormalItemWithDiscountOCR_HeavyCastDie",
+            "CreditShoppingBuyNormalItemWithDiscountOCR_ElementaryCognitiveCarrier",
             "CreditShoppingBuyNormalItemWithDiscountOCR_ArmsInspector",
             "CreditShoppingBuyNormalItemWithDiscountOCR_ArmsINSPKit",
-            "CreditShoppingBuyNormalItemWithDiscountOCR_Protohedron",
-            "CreditShoppingBuyNormalItemWithDiscountOCR_Protoprism"
+            "CreditShoppingBuyNormalItemWithDiscountOCR_CastDie",
+            "CreditShoppingBuyNormalItemWithDiscountOCR_HeavyCastDie",
+            "CreditShoppingBuyNormalItemWithDiscountOCR_Protodisk",
+            "CreditShoppingBuyNormalItemWithDiscountOCR_Protoset",
+            "CreditShoppingBuyNormalItemWithDiscountOCR_Protoprism",
+            "CreditShoppingBuyNormalItemWithDiscountOCR_Protohedron"
         ]
     },
     "CreditShoppingBuyBlacklistItem": {
         "desc": "识别购买商品(黑名单)",
         "recognition": "OCR",
         "roi": [
-            58,
-            55,
-            330,
-            164
+            146,
+            69,
+            241,
+            150
         ],
         "expected": [
-            "购买商品",
-            "購買商品",
-            "(?i)Purchase",
-            "購入"
+            "购买商品"
         ],
         "next": [
-            "CreditShoppingBuyBlacklistItemOCR_Oroberyl",
             "CreditShoppingBuyBlacklistItemOCR_ArsenalTicket",
+            "CreditShoppingBuyBlacklistItemOCR_Oroberyl",
             "CreditShoppingBuyBlacklistItemOCR_TCreds",
-            "CreditShoppingBuyBlacklistItemOCR_ElementaryCognitiveCarrier",
             "CreditShoppingBuyBlacklistItemOCR_ElementaryCombatRecord",
             "CreditShoppingBuyBlacklistItemOCR_IntermediateCombatRecord",
-            "CreditShoppingBuyBlacklistItemOCR_CastDie",
-            "CreditShoppingBuyBlacklistItemOCR_HeavyCastDie",
+            "CreditShoppingBuyBlacklistItemOCR_ElementaryCognitiveCarrier",
             "CreditShoppingBuyBlacklistItemOCR_ArmsInspector",
             "CreditShoppingBuyBlacklistItemOCR_ArmsINSPKit",
-            "CreditShoppingBuyBlacklistItemOCR_Protohedron",
-            "CreditShoppingBuyBlacklistItemOCR_Protoprism"
+            "CreditShoppingBuyBlacklistItemOCR_CastDie",
+            "CreditShoppingBuyBlacklistItemOCR_HeavyCastDie",
+            "CreditShoppingBuyBlacklistItemOCR_Protodisk",
+            "CreditShoppingBuyBlacklistItemOCR_Protoset",
+            "CreditShoppingBuyBlacklistItemOCR_Protoprism",
+            "CreditShoppingBuyBlacklistItemOCR_Protohedron"
         ]
     },
     "CreditShoppingBuyFailed": {

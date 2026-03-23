@@ -380,7 +380,7 @@
         ]
     },
     "ReceptionRoomReceiveExit": {
-        "desc": "[会客室·线索] 领取界面点击左上会客室标题关闭领取界面",
+        "desc": "[会客室·线索] 关闭领取界面",
         "recognition": "And",
         "all_of": [
             "CloseButtonType1"
@@ -391,6 +391,16 @@
             "param": {
                 "contact": 0
             }
+        },
+        "post_wait_freezes": {
+            "time": 200,
+            "target": [
+                1162,
+                193,
+                118,
+                303
+            ],
+            "timeout": 1000
         },
         "post_delay": 0,
         "rate_limit": 0,

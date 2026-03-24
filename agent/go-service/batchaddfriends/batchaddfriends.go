@@ -184,7 +184,7 @@ func (a *BatchAddFriendsUIDOnAddAction) Run(ctx *maa.Context, arg *maa.CustomAct
 		Int("fail", state.uidFail).
 		Str("uid", state.uidCurrent).
 		Msg("[BatchAddFriends]已点击添加好友")
-	maafocus.NodeActionStarting(
+	maafocus.Print(
 		ctx,
 		i18n.T("batchaddfriends.uid_sent", state.uidCurrent, state.uidSuccess, state.uidTotal),
 	)
@@ -229,7 +229,7 @@ func (a *BatchAddFriendsUIDFinishAction) Run(ctx *maa.Context, arg *maa.CustomAc
 
 func (a *BatchAddFriendsStrangersOnAddAction) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 	state.strangersProcessed++
-	maafocus.NodeActionStarting(
+	maafocus.Print(
 		ctx,
 		i18n.T("batchaddfriends.strangers_progress", state.strangersProcessed, state.strangersMaxCount),
 	)

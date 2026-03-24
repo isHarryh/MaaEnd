@@ -21,7 +21,7 @@ func dataDirFromResourceBase() string {
 }
 
 func reportFocusByKey(ctx *maa.Context, _ *RunState, key string, args ...any) {
-	maafocus.NodeActionStarting(ctx, i18n.T("essencefilter."+key, args...))
+	maafocus.Print(ctx, i18n.T("essencefilter."+key, args...))
 }
 
 func reportSimpleByKey(ctx *maa.Context, _ *RunState, key string, args ...any) {

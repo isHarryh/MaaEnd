@@ -370,7 +370,7 @@ func (r *ItemValueChangeRecognition) Run(ctx *maa.Context, arg *maa.CustomRecogn
 		Str("abort_reason", string(resultPayload.AbortReason)).
 		Int("goods_count", len(resultPayload.Data.Goods)).
 		Msg("custom recognition finished")
-	maafocus.NodeActionStarting(ctx, i18n.T("autostockpile.recognition_done", len(resultPayload.Data.Goods)))
+	maafocus.Print(ctx, i18n.T("autostockpile.recognition_done", len(resultPayload.Data.Goods)))
 
 	return result, true
 }

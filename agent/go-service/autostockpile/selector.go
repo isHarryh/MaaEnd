@@ -117,7 +117,7 @@ func (a *SelectItemAction) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool 
 			Str("component", "autostockpile").
 			Str("reason", selection.Reason).
 			Msg("no qualifying product selected")
-		maafocus.NodeActionStarting(ctx, i18n.T("autostockpile.no_qualifying_product", selection.Reason))
+		maafocus.Print(ctx, i18n.T("autostockpile.no_qualifying_product", selection.Reason))
 		if err := overrideSkipBranch(ctx, arg.CurrentTaskName); err != nil {
 			log.Error().
 				Err(err).
@@ -148,7 +148,7 @@ func (a *SelectItemAction) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool 
 			quantitySkipLog = quantitySkipLog.Int("max_buy", quantityDecision.MaxBuy)
 		}
 		quantitySkipLog.Msg("quantity decision requested skip short-circuit")
-		maafocus.NodeActionStarting(ctx, i18n.T("autostockpile.hit_but_skip", quantityDecision.Reason))
+		maafocus.Print(ctx, i18n.T("autostockpile.hit_but_skip", quantityDecision.Reason))
 		if err := overrideSkipBranch(ctx, arg.CurrentTaskName); err != nil {
 			log.Error().
 				Err(err).
@@ -203,7 +203,7 @@ func (a *SelectItemAction) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool 
 		quantityLog = quantityLog.Int("quantity_target", quantityDecision.Target)
 	}
 	quantityLog.Msg("product selected and pipeline overridden")
-	maafocus.NodeActionStarting(ctx, i18n.T("autostockpile.product_selected", selectionMode, selection.ProductName, selection.CurrentPrice, selection.Threshold, formatQuantityText(quantityDecision)))
+	maafocus.Print(ctx, i18n.T("autostockpile.product_selected", selectionMode, selection.ProductName, selection.CurrentPrice, selection.Threshold, formatQuantityText(quantityDecision)))
 
 	return true
 }
@@ -324,12 +324,12 @@ func routeSkipWithAbortReason(ctx *maa.Context, currentTaskName string, reason A
 	logEvent.Msg("routing current cycle to skip branch")
 
 	if reason == AbortReasonStockBillUnavailableWarn || reason == AbortReasonGoodsOCRUnavailableWarn {
-		maafocus.NodeActionStarting(ctx, i18n.RenderHTML("autostockpile.warning_skip", map[string]any{
+		maafocus.Print(ctx, i18n.RenderHTML("autostockpile.warning_skip", map[string]any{
 			"Prefix": focusPrefix,
 			"Reason": reasonText,
 		}))
 	} else {
-		maafocus.NodeActionStarting(ctx, i18n.T("autostockpile.abort_info", focusPrefix, reasonText))
+		maafocus.Print(ctx, i18n.T("autostockpile.abort_info", focusPrefix, reasonText))
 	}
 	if err := overrideSkipBranch(ctx, currentTaskName); err != nil {
 		log.Error().
@@ -356,7 +356,7 @@ func stopTaskWithFocus(ctx *maa.Context, reason AbortReason, err error) bool {
 	}
 	logEvent.Msg("stopping task due to fatal abort reason")
 
-	maafocus.NodeActionStarting(ctx, i18n.RenderHTML("autostockpile.fatal_error", map[string]any{
+	maafocus.Print(ctx, i18n.RenderHTML("autostockpile.fatal_error", map[string]any{
 		"Reason": reasonText,
 	}))
 	if ctx == nil || ctx.GetTasker() == nil {

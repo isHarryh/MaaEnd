@@ -17,7 +17,7 @@ func (a *ResellDecideAction) Run(ctx *maa.Context, arg *maa.CustomActionArg) boo
 
 	if len(records) == 0 {
 		log.Info().Msg("[Resell]库存已售罄，无可购买商品")
-		maafocus.NodeActionStarting(ctx, i18n.T("resell.stock_empty"))
+		maafocus.Print(ctx, i18n.T("resell.stock_empty"))
 		ctx.OverrideNext(arg.CurrentTaskName, []maa.NextItem{{Name: "ChangeNextRegionPrepare"}})
 		return true
 	}
@@ -48,7 +48,7 @@ func (a *ResellDecideAction) Run(ctx *maa.Context, arg *maa.CustomActionArg) boo
 	if overflowAmount > 0 {
 		log.Info().Msgf("[Resell]配额溢出：建议购买%d件，推荐第%d行第%d列（利润：%d）",
 			overflowAmount, showMaxRecord.Row, showMaxRecord.Col, showMaxRecord.Profit)
-		maafocus.NodeActionStarting(ctx, i18n.T("resell.quota_overflow", overflowAmount, showMaxRecord.Row, showMaxRecord.Col, showMaxRecord.Profit))
+		maafocus.Print(ctx, i18n.T("resell.quota_overflow", overflowAmount, showMaxRecord.Row, showMaxRecord.Col, showMaxRecord.Profit))
 		ctx.OverrideNext(arg.CurrentTaskName, []maa.NextItem{{Name: "ChangeNextRegionPrepare"}})
 		return true
 	}
@@ -61,7 +61,7 @@ func (a *ResellDecideAction) Run(ctx *maa.Context, arg *maa.CustomActionArg) boo
 	} else {
 		message = i18n.T("resell.below_min_profit", showMaxRecord.Row, showMaxRecord.Col, showMaxRecord.Profit)
 	}
-	maafocus.NodeActionStarting(ctx, message)
+	maafocus.Print(ctx, message)
 	ctx.OverrideNext(arg.CurrentTaskName, []maa.NextItem{{Name: "ChangeNextRegionPrepare"}})
 	return true
 }

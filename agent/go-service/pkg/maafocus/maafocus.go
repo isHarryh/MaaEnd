@@ -9,9 +9,9 @@ import (
 
 const nodeName = "_GO_SERVICE_FOCUS_"
 
-// NodeActionStarting sends focus payload on node action starting event.
+// Print sends focus payload on node action starting event.
 // The actual UI rendering is handled by client side.
-func NodeActionStarting(ctx *maa.Context, content string) {
+func Print(ctx *maa.Context, content string) {
 	if ctx == nil {
 		log.Warn().
 			Str("event", "node_action_starting").

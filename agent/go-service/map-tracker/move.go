@@ -158,7 +158,7 @@ func (a *MapTrackerMove) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 		if initResult, err := doInfer(ctx, ctrl, param); err == nil && initResult != nil {
 			initRot = calcTargetRotation(initResult.X, initResult.Y, targetX, targetY)
 			if !param.NoPrint {
-				maafocus.NodeActionStarting(
+				maafocus.Print(
 					ca.Ctx(),
 					a.buildNavigationMovingHTML(param, i, initResult.X, initResult.Y, targetX, targetY),
 				)
@@ -386,7 +386,7 @@ func (a *MapTrackerMove) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 		if finalInfer, err := doInfer(ctx, ctrl, param); err == nil && finalInfer != nil {
 			finishedX, finishedY = finalInfer.X, finalInfer.Y
 		}
-		maafocus.NodeActionStarting(
+		maafocus.Print(
 			ca.Ctx(),
 			a.buildNavigationFinishedHTML(param, finishedX, finishedY),
 		)
@@ -486,7 +486,7 @@ func (a *MapTrackerMove) parseParam(paramStr string) (*MapTrackerMoveParam, erro
 func doEmergencyStop(ca control.ControlAdaptor, noPrint bool) {
 	log.Warn().Msg("Emergency stop triggered")
 	if !noPrint {
-		maafocus.NodeActionStarting(ca.Ctx(), i18n.RenderHTML("maptracker.emergency_stop", nil))
+		maafocus.Print(ca.Ctx(), i18n.RenderHTML("maptracker.emergency_stop", nil))
 	}
 	ca.PlayerStop()
 	ca.Ctx().GetTasker().PostStop()

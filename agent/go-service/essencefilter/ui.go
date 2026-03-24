@@ -31,7 +31,7 @@ type (
 
 func LogMXUHTML(ctx *maa.Context, htmlText string) {
 	htmlText = strings.TrimLeft(htmlText, " \t\r\n")
-	maafocus.NodeActionStarting(ctx, htmlText)
+	maafocus.Print(ctx, htmlText)
 }
 
 // LogMXUSimpleHTMLWithColor logs a simple styled span, allowing a custom color.

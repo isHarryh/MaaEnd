@@ -335,7 +335,7 @@ func (r *VisitFriendsMenuScanTargetFriendOpenRecognition) Run(ctx *maa.Context, 
 			missParts = append(missParts, i18n.T("visitfriends.growth_chamber_assist"))
 		}
 		message := i18n.T("visitfriends.friend_missing", strings.Join(missParts, i18n.Separator()))
-		maafocus.NodeActionStarting(ctx, message)
+		maafocus.Print(ctx, message)
 	}
 
 	if !result.HasTarget {
@@ -391,9 +391,9 @@ func (a *VisitFriendsMenuScanTargetFriendOpenAction) Run(ctx *maa.Context, arg *
 	}
 	if len(canParts) > 0 {
 		message := i18n.T("visitfriends.found_target_with", strings.Join(canParts, i18n.Separator()))
-		maafocus.NodeActionStarting(ctx, message)
+		maafocus.Print(ctx, message)
 	} else {
-		maafocus.NodeActionStarting(ctx, i18n.T("visitfriends.found_target"))
+		maafocus.Print(ctx, i18n.T("visitfriends.found_target"))
 	}
 
 	override := map[string]any{
@@ -524,7 +524,7 @@ func (r *VisitFriendsMenuScanScrollFullRecognition) Run(ctx *maa.Context, arg *m
 
 	if !result {
 		message := i18n.T("visitfriends.current_counts", currentAssistCount, currentClueExchangeCount)
-		maafocus.NodeActionStarting(ctx, message)
+		maafocus.Print(ctx, message)
 		return nil, false
 	}
 	return &maa.CustomRecognitionResult{

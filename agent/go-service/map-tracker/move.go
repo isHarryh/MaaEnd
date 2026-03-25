@@ -374,8 +374,7 @@ func (a *MapTrackerMove) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 		// End of loop, one target reached
 	}
 
-	// End of all targets reached, reset to running mode and stop movement
-	ca.SetPlayerMovement(control.MovementRun)
+	// End of all targets reached
 	ca.PlayerStop()
 
 	// Show finished UI summary

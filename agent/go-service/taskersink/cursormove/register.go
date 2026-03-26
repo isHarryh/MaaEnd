@@ -11,12 +11,13 @@ func Register() {
 	// if pienv.ControllerName() != "Win32-Front" {
 	// 	return
 	// }
+	return
 
-	// sink := &CursorMoveSink{}
-	// maa.AgentServerAddContextSink(sink)
-	// maa.AgentServerAddTaskerSink(sink)
-	// log.Info().
-	// 	Str("component", "cursormove").
-	// 	Str("controller", pienv.ControllerName()).
-	// 	Msg("sinks registered for Win32 controller")
+	sink := &CursorMoveSink{}
+	maa.AgentServerAddContextSink(sink)
+	maa.AgentServerAddTaskerSink(sink)
+	log.Info().
+		Str("component", "cursormove").
+		Str("controller", pienv.ControllerName()).
+		Msg("sinks registered for Win32 controller")
 }

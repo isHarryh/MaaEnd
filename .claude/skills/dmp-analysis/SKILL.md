@@ -35,6 +35,7 @@ cargo binstall -y --no-confirm minidump-stackwalk dump_syms
 Download `.dmp` to `.cache/dmp-analysis/issue-<number>/`.
 
 Sources:
+
 - Direct issue attachment (image/file link ending in `.dmp`)
 - Inside `MaaEnd-logs-*.zip` log package
 
@@ -63,15 +64,16 @@ Match this with `maa.log` entries tagged `[Px18188]` to pinpoint the exact crash
 
 DMP module version info is frequently empty/unavailable. Prefer log and config sources:
 
-| Priority | Source | How |
-|----------|--------|-----|
-| 1 | `mxu-tauri.log` | `maa_init success, version: v5.x.x` |
-| 2 | `go-service.log` | `client_maafw_version` / `client_version` in PI environment log |
-| 3 | Config files from logs package | `interface.json`, `maa_option.json` |
-| 4 | Issue text | User-reported version |
-| 5 | Module list in stackwalk output | Version column (often shows `?`) |
+| Priority | Source                          | How                                                             |
+| -------- | ------------------------------- | --------------------------------------------------------------- |
+| 1        | `mxu-tauri.log`                 | `maa_init success, version: v5.x.x`                             |
+| 2        | `go-service.log`                | `client_maafw_version` / `client_version` in PI environment log |
+| 3        | Config files from logs package  | `interface.json`, `maa_option.json`                             |
+| 4        | Issue text                      | User-reported version                                           |
+| 5        | Module list in stackwalk output | Version column (often shows `?`)                                |
 
 Record:
+
 - **MaaFramework version** (e.g. `5.9.2`)
 - **MXU version** (e.g. `1.21.2`)
 
@@ -88,17 +90,17 @@ unzip -joq "$WORK/maa-fw.zip" 'symbol/*.pdb' -d "$WORK/pdb/"
 
 PDB files inside `symbol/`:
 
-| PDB | Corresponding Module |
-|-----|---------------------|
-| MaaFramework.pdb | MaaFramework.dll — core pipeline runtime |
-| MaaUtils.pdb | MaaUtils.dll — utility library |
-| MaaToolkit.pdb | MaaToolkit.dll — toolkit |
-| MaaWin32ControlUnit.pdb | MaaWin32ControlUnit.dll — Win32 controller |
-| MaaAdbControlUnit.pdb | MaaAdbControlUnit.dll — ADB controller |
-| MaaAgentServer.pdb | MaaAgentServer.dll — agent server |
-| MaaAgentClient.pdb | MaaAgentClient.dll — agent client |
-| MaaPiCli.pdb | MaaPiCli.exe — CLI entry |
-| Others | GamepadControlUnit, CustomControlUnit, NodeServer, Node |
+| PDB                     | Corresponding Module                                    |
+| ----------------------- | ------------------------------------------------------- |
+| MaaFramework.pdb        | MaaFramework.dll — core pipeline runtime                |
+| MaaUtils.pdb            | MaaUtils.dll — utility library                          |
+| MaaToolkit.pdb          | MaaToolkit.dll — toolkit                                |
+| MaaWin32ControlUnit.pdb | MaaWin32ControlUnit.dll — Win32 controller              |
+| MaaAdbControlUnit.pdb   | MaaAdbControlUnit.dll — ADB controller                  |
+| MaaAgentServer.pdb      | MaaAgentServer.dll — agent server                       |
+| MaaAgentClient.pdb      | MaaAgentClient.dll — agent client                       |
+| MaaPiCli.pdb            | MaaPiCli.exe — CLI entry                                |
+| Others                  | GamepadControlUnit, CustomControlUnit, NodeServer, Node |
 
 #### MXU
 
@@ -198,11 +200,11 @@ Look up the function and line from the symbolicated stack trace in the cloned so
 
 ### 关键模块版本
 
-| Module | Version |
-|--------|---------|
-| mxu.exe | ... |
-| MaaFramework.dll | ... |
-| ... | ... |
+| Module           | Version |
+| ---------------- | ------- |
+| mxu.exe          | ...     |
+| MaaFramework.dll | ...     |
+| ...              | ...     |
 
 ### 根因判断
 

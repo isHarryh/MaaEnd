@@ -59,11 +59,11 @@
             }
         },
         "pre_delay": 0,
-        "anchor": {
-            "MouseMoveResetAnchor": "MouseMoveReset"
-        },
         "action": {
             "type": "Click"
+        },
+        "anchor": {
+            "MouseMoveResetAnchor": "MouseMoveReset"
         },
         "post_delay": 0,
         "rate_limit": 0,

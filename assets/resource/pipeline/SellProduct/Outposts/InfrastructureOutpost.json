@@ -1,52 +1,35 @@
 {
-    "SellProductWulingSell": {
-        "desc": "在武陵售卖",
-        "max_hit": 1,
-        "pre_delay": 0,
-        "action": "Custom",
-        "custom_action": "SubTask",
-        "custom_action_param": {
-            "sub": [
-                "SceneEnterMenuRegionalDevelopmentWulingOutpostManagement"
-            ]
-        },
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": [
-            "[JumpBack]SellProductSkyKingFlats",
-            "SellProductLoop",
-            "[JumpBack]SceneEnterMenuRegionalDevelopment"
-        ]
-    },
-    "SellProductSkyKingFlats": {
-        "desc": "天王坪援建点售卖",
+    // ===== 售卖点顶层节点 =====
+    "SellProductInfrastructureOutpost": {
+        "desc": "基建前站售卖",
         "max_hit": 1,
         "recognition": "And",
         "all_of": [
-            "SellProductCheckSkyKingFlatsTabText"
+            "SellProductCheckInfrastructureOutpostTabText"
         ],
         "pre_delay": 0,
         "post_delay": 0,
         "rate_limit": 0,
         "next": [
-            "SellProductSkyKingFlatsSell",
-            "[JumpBack]SellProductGoToSkyKingFlatsOutpost"
+            "SellProductInfrastructureOutpostSell",
+            "[JumpBack]SellProductGoToInfrastructureOutpost"
         ]
     },
-    "SellProductSkyKingFlatsSell": {
-        "desc": "天王坪援建点售卖",
+    // ===== 售卖锚点节点 =====
+    "SellProductInfrastructureOutpostSell": {
+        "desc": "基建前站售卖",
         "recognition": "And",
         "all_of": [
-            "SellProductInSkyKingFlats"
+            "SellProductInInfrastructureOutpost"
         ],
         "pre_delay": 0,
         "anchor": {
             "SellProductZeroMoneyHandler": "SellProductZeroMoneyWithTip",
             "SellProductSelectGoodFirstTime": "SellProductSelectFirstGood",
-            "SellProductSellAttempt1": "SellProductSkyKingFlatsSellAttempt1",
-            "SellProductSellAttempt2": "SellProductSkyKingFlatsSellAttempt2",
-            "SellProductSellAttempt3": "SellProductSkyKingFlatsSellAttempt3",
-            "SellProductSellAttempt4": "SellProductSkyKingFlatsSellAttempt4"
+            "SellProductSellAttempt1": "SellProductInfrastructureOutpostSellAttempt1",
+            "SellProductSellAttempt2": "SellProductInfrastructureOutpostSellAttempt2",
+            "SellProductSellAttempt3": "SellProductInfrastructureOutpostSellAttempt3",
+            "SellProductSellAttempt4": "SellProductInfrastructureOutpostSellAttempt4"
         },
         "post_delay": 0,
         "rate_limit": 0,
@@ -54,23 +37,25 @@
             "SellProductSellLoop"
         ]
     },
-    "SellProductInSkyKingFlats": {
-        "desc": "在天王坪援建点",
+    // ===== 在指定据点的识别节点 =====
+    "SellProductInInfrastructureOutpost": {
+        "desc": "在基建前站",
         "recognition": "And",
         "all_of": [
-            "SellProductCheckSkyKingFlatsText",
+            "SellProductCheckInfrastructureOutpostText",
             "SellProductInOutpost"
         ],
         "pre_delay": 0,
         "post_delay": 0,
         "rate_limit": 0
     },
-    "SellProductGoToSkyKingFlatsOutpost": {
-        "desc": "前往天王坪援建点据点",
+    // ===== 前往据点导航节点 =====
+    "SellProductGoToInfrastructureOutpost": {
+        "desc": "前往基建前站据点",
         "recognition": "And",
         "all_of": [
-            "SellProductInWulingOutpost",
-            "SellProductCheckSkyKingFlatsTabText"
+            "SellProductInValleyIVOutpost",
+            "SellProductCheckInfrastructureOutpostTabText"
         ],
         "box_index": 1,
         "pre_delay": 0,
@@ -78,11 +63,12 @@
         "post_delay": 0,
         "rate_limit": 0,
         "next": [
-            "SellProductInSkyKingFlats"
+            "SellProductInInfrastructureOutpost"
         ]
     },
-    "SellProductCheckSkyKingFlatsTabText": {
-        "desc": "检查天王坪援建点文本",
+    // ===== 标签页文本检查（小文本） =====
+    "SellProductCheckInfrastructureOutpostTabText": {
+        "desc": "检查基建前站文本",
         "recognition": "OCR",
         "roi": [
             0,
@@ -91,19 +77,17 @@
             160
         ],
         "expected": [
-            "天王坪",
-            "天王坪援助",
-            "天王坪援建",
-            "Sky King",
-            "天王原",
-            "천왕"
+            "基建前站",
+            "(?i)Infra\\s*-\\s*Station",
+            "建設基地"
         ],
         "pre_delay": 0,
         "post_delay": 0,
         "rate_limit": 0
     },
-    "SellProductCheckSkyKingFlatsText": {
-        "desc": "检查天王坪援建点大字文本",
+    // ===== 据点内大字文本检查 =====
+    "SellProductCheckInfrastructureOutpostText": {
+        "desc": "检查基建前站大字文本",
         "recognition": "OCR",
         "roi": [
             198,
@@ -112,19 +96,17 @@
             127
         ],
         "expected": [
-            "天王坪",
-            "天王坪援助",
-            "天王坪援建",
-            "Sky King",
-            "天王原",
-            "천왕"
+            "基建前站",
+            "(?i)Infra\\s*-\\s*Station",
+            "建設基地"
         ],
         "pre_delay": 0,
         "post_delay": 0,
         "rate_limit": 0
     },
-    "SellProductSkyKingFlatsSellAttempt1": {
-        "desc": "天王坪援建点第1次尝试：先换货再售卖",
+    // ===== 售卖尝试 1 =====
+    "SellProductInfrastructureOutpostSellAttempt1": {
+        "desc": "基建前站第1次尝试：先换货再售卖",
         "enabled": false,
         "max_hit": 1,
         "recognition": "And",
@@ -133,7 +115,8 @@
         ],
         "pre_delay": 0,
         "anchor": {
-            "SellProductSelectNewGood": "SellProductSkyKingFlatsSelectItem1"
+            "SellProductSelectNewGood": "SellProductInfrastructureOutpostSelectItem1",
+            "SellProductPriorityGoodMissHandler": ""
         },
         "post_delay": 0,
         "rate_limit": 0,
@@ -141,8 +124,9 @@
             "SellProductChangeGoods"
         ]
     },
-    "SellProductSkyKingFlatsSellAttempt2": {
-        "desc": "天王坪援建点第2次尝试：先换货再售卖",
+    // ===== 售卖尝试 2 =====
+    "SellProductInfrastructureOutpostSellAttempt2": {
+        "desc": "基建前站第2次尝试：先换货再售卖",
         "enabled": false,
         "max_hit": 1,
         "recognition": "And",
@@ -151,7 +135,8 @@
         ],
         "pre_delay": 0,
         "anchor": {
-            "SellProductSelectNewGood": "SellProductSkyKingFlatsSelectItem2"
+            "SellProductSelectNewGood": "SellProductInfrastructureOutpostSelectItem2",
+            "SellProductPriorityGoodMissHandler": ""
         },
         "post_delay": 0,
         "rate_limit": 0,
@@ -159,8 +144,9 @@
             "SellProductChangeGoods"
         ]
     },
-    "SellProductSkyKingFlatsSellAttempt3": {
-        "desc": "天王坪援建点第3次尝试：先换货再售卖",
+    // ===== 售卖尝试 3 =====
+    "SellProductInfrastructureOutpostSellAttempt3": {
+        "desc": "基建前站第3次尝试：先换货再售卖",
         "enabled": false,
         "max_hit": 1,
         "recognition": "And",
@@ -169,7 +155,8 @@
         ],
         "pre_delay": 0,
         "anchor": {
-            "SellProductSelectNewGood": "SellProductSkyKingFlatsSelectItem3"
+            "SellProductSelectNewGood": "SellProductInfrastructureOutpostSelectItem3",
+            "SellProductPriorityGoodMissHandler": ""
         },
         "post_delay": 0,
         "rate_limit": 0,
@@ -177,8 +164,9 @@
             "SellProductChangeGoods"
         ]
     },
-    "SellProductSkyKingFlatsSellAttempt4": {
-        "desc": "天王坪援建点第4次尝试：先换货再售卖",
+    // ===== 售卖尝试 4 =====
+    "SellProductInfrastructureOutpostSellAttempt4": {
+        "desc": "基建前站第4次尝试：先换货再售卖",
         "enabled": false,
         "max_hit": 1,
         "recognition": "And",
@@ -187,7 +175,8 @@
         ],
         "pre_delay": 0,
         "anchor": {
-            "SellProductSelectNewGood": "SellProductSkyKingFlatsSelectItem4"
+            "SellProductSelectNewGood": "SellProductInfrastructureOutpostSelectItem4",
+            "SellProductPriorityGoodMissHandler": ""
         },
         "post_delay": 0,
         "rate_limit": 0,
@@ -195,8 +184,9 @@
             "SellProductChangeGoods"
         ]
     },
-    "SellProductSkyKingFlatsSelectItem1": {
-        "desc": "天王坪援建点售卖优先物品1",
+    // ===== 优先物品 1 =====
+    "SellProductInfrastructureOutpostSelectItem1": {
+        "desc": "基建前站售卖优先物品1",
         "enabled": false,
         "recognition": "OCR",
         "roi": [
@@ -206,6 +196,12 @@
             518
         ],
         "expected": [],
+        "replace": [
+            [
+                "[\\[\\]|]+",
+                ""
+            ]
+        ],
         "pre_delay": 0,
         "action": "Click",
         "anchor": {
@@ -217,8 +213,9 @@
             "SellProductSelectNewGoodConfirm"
         ]
     },
-    "SellProductSkyKingFlatsSelectItem2": {
-        "desc": "天王坪援建点售卖优先物品2",
+    // ===== 优先物品 2 =====
+    "SellProductInfrastructureOutpostSelectItem2": {
+        "desc": "基建前站售卖优先物品2",
         "enabled": false,
         "recognition": "OCR",
         "roi": [
@@ -228,6 +225,12 @@
             518
         ],
         "expected": [],
+        "replace": [
+            [
+                "[\\[\\]|]+",
+                ""
+            ]
+        ],
         "pre_delay": 0,
         "action": "Click",
         "anchor": {
@@ -239,8 +242,9 @@
             "SellProductSelectNewGoodConfirm"
         ]
     },
-    "SellProductSkyKingFlatsSelectItem3": {
-        "desc": "天王坪援建点售卖优先物品3",
+    // ===== 优先物品 3 =====
+    "SellProductInfrastructureOutpostSelectItem3": {
+        "desc": "基建前站售卖优先物品3",
         "enabled": false,
         "recognition": "OCR",
         "roi": [
@@ -250,6 +254,12 @@
             518
         ],
         "expected": [],
+        "replace": [
+            [
+                "[\\[\\]|]+",
+                ""
+            ]
+        ],
         "pre_delay": 0,
         "action": "Click",
         "anchor": {
@@ -261,8 +271,9 @@
             "SellProductSelectNewGoodConfirm"
         ]
     },
-    "SellProductSkyKingFlatsSelectItem4": {
-        "desc": "天王坪援建点售卖优先物品4",
+    // ===== 优先物品 4 =====
+    "SellProductInfrastructureOutpostSelectItem4": {
+        "desc": "基建前站售卖优先物品4",
         "enabled": false,
         "recognition": "OCR",
         "roi": [
@@ -272,6 +283,12 @@
             518
         ],
         "expected": [],
+        "replace": [
+            [
+                "[\\[\\]|]+",
+                ""
+            ]
+        ],
         "pre_delay": 0,
         "action": "Click",
         "anchor": {

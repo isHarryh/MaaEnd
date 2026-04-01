@@ -332,6 +332,7 @@
                         },
                         "ItemTransferRepoToBag": {
                             "next": [
+                                "ItemTransferClickSortAscending",
                                 "ItemTransferClickItemCategory",
                                 "ItemTransferFindItemWithOCR"
                             ]
@@ -1311,6 +1312,7 @@
                         },
                         "ItemTransferRepoToBag": {
                             "next": [
+                                "ItemTransferClickSortAscending",
                                 "ItemTransferClickItemCategory",
                                 "ItemTransferFindItemWithOCR"
                             ]

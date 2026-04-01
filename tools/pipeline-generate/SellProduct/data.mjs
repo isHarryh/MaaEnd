@@ -1,5 +1,4 @@
 // SellProduct 数据源
-// 基于 settlement_trade_outposts.json 自动构建物品列表（取所有繁荣度等级的并集）
 
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
@@ -98,6 +97,12 @@ const SETTLEMENT_MAP = {
     },
 };
 
+const SETTLEMENT_REGION_MAP = Object.entries(SETTLEMENT_MAP).reduce((acc, [settlementId, config]) => {
+    acc[config.RegionPrefix] = acc[config.RegionPrefix] || [];
+    acc[config.RegionPrefix].push(`${config.RegionPrefix}${config.LocationId}`);
+    return acc;
+}, {});
+
 // ===== 从 settlement 数据构建 LOCATIONS（取所有繁荣度等级的物品并集） =====
 const LOCATIONS = Object.entries(SETTLEMENT_MAP).map(
     ([settlementId, config]) => {
@@ -174,9 +179,9 @@ function buildItemCases(nodePrefix, itemNum, itemIds) {
     return cases;
 }
 
-// ===== 导出数据 =====
-export default LOCATIONS.map((loc) => ({
+export const settlementFlatRows = LOCATIONS.map((loc) => ({
     RegionPrefix: loc.RegionPrefix,
+    SellOptions: SETTLEMENT_REGION_MAP[loc.RegionPrefix],
     LocationId: loc.LocationId,
     LocationDesc: loc.LocationDesc,
     TextExpected: loc.TextExpected,
@@ -185,3 +190,5 @@ export default LOCATIONS.map((loc) => ({
     ItemCases3: buildItemCases(loc.LocationId, 3, loc.items),
     ItemCases4: buildItemCases(loc.LocationId, 4, loc.items),
 }));
+
+export default settlementFlatRows;

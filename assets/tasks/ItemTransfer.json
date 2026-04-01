@@ -1300,6 +1300,49 @@
                     }
                 },
                 {
+                    "name": "赤铜瓶",
+                    "label": "$item.CuprumBottle",
+                    "pipeline_override": {
+                        "ItemTransferClickItemCategory": {
+                            "template": "ItemTransfer/Product.png",
+                            "next": [
+                                "ItemTransferFindItemWithOCR"
+                            ]
+                        },
+                        "ItemTransferRepoToBag": {
+                            "next": [
+                                "ItemTransferClickItemCategory",
+                                "ItemTransferFindItemWithOCR"
+                            ]
+                        },
+                        "ItemTransferBagToRepo": {
+                            "next": [
+                                "ItemTransferFindItemWithOCRBag"
+                            ]
+                        },
+                        "ItemTransferBagToOriginRepo": {
+                            "next": [
+                                "ItemTransferFindItemWithOCRBagReturn"
+                            ]
+                        },
+                        "ItemTransferFindItemWithOCR": {
+                            "custom_action_param": {
+                                "item_name": "赤铜瓶"
+                            }
+                        },
+                        "ItemTransferFindItemWithOCRBag": {
+                            "custom_action_param": {
+                                "item_name": "赤铜瓶"
+                            }
+                        },
+                        "ItemTransferFindItemWithOCRBagReturn": {
+                            "custom_action_param": {
+                                "item_name": "赤铜瓶"
+                            }
+                        }
+                    }
+                },
+                {
                     "name": "紫晶质瓶",
                     "label": "$item.AmethystBottle",
                     "pipeline_override": {

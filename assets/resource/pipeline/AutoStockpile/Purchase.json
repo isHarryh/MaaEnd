@@ -80,15 +80,15 @@
                     "DecreaseButton": "AutoStockpile/DecreaseButton.png",
                     "Direction": "right",
                     "IncreaseButton": "AutoStockpile/IncreaseButton.png",
+                    "GreenMask": true,
                     "Quantity": {
                         "Target": 1,
                         "Box": [
-                            340,
-                            430,
-                            200,
-                            140
-                        ],
-                        "OnlyRec": true
+                            360,
+                            480,
+                            100,
+                            45
+                        ]
                     },
                     "QuantityFilter": {
                         "lower": [

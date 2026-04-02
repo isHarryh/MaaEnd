@@ -177,13 +177,31 @@
         ],
         "post_wait_freezes": 200,
         "next": [
-            "ProtocolSpaceTouchStartTouch",
-            "[JumpBack]ProtocolSpaceTouchStartMoveToTarget",
-            "[JumpBack]ProtocolSpaceTouchStartNotFound"
+            "ProtocolSpaceTouchStartDelta"
         ],
         "focus": {
             "Node.Recognition.Succeeded": "进入协议空间成功"
         }
+    },
+    "ProtocolSpaceTouchStartDelta": {
+        "desc": "向下拉动视角，避免光点被头挡住",
+        "recognition": "And",
+        "all_of": [
+            "ProtocolSpaceIn"
+        ],
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
+        "action": "Custom",
+        "custom_action": "CharacterControllerPitchDeltaAction",
+        "custom_action_param": {
+            "delta": 90 // 这个不准，看着用
+        },
+        "next": [
+            "ProtocolSpaceTouchStartTouch",
+            "[JumpBack]ProtocolSpaceTouchStartMoveToTarget",
+            "[JumpBack]ProtocolSpaceTouchStartNotFound"
+        ]
     },
     "ProtocolSpaceTouchStartMoveToTarget": {
         "desc": "向目标移动",

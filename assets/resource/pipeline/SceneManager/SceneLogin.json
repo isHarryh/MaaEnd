@@ -15,10 +15,9 @@
                 ]
             }
         },
-        "action": "ClickKey",
-        "key": 27, // 公告弹窗截不到图无法识别，因此硬编码ESC
         "next": [
             "__ScenePrivateLoginContinue",
+            "[JumpBack]__ScenePrivateCloseLoginAnnouncement",
             "__ScenePrivateLogin"
         ]
     },
@@ -51,6 +50,50 @@
             "__ScenePrivateLoginSuccess",
             "[JumpBack]__ScenePrivateLoginCloseDialog"
         ]
+    },
+    "__ScenePrivateCloseLoginAnnouncement": {
+        "desc": "关闭登录时公告界面",
+        "recognition": "And",
+        "all_of": [
+            {
+                "sub_name": "__ScenePrivateCloseAnnouncementButton",
+                "recognition": {
+                    "type": "TemplateMatch",
+                    "desc": "识别登录时公告界面的关闭按钮,这里不用通用按钮的原因是 roi 和模版大小都不同",
+                    "param": {
+                        "roi": [
+                            1178,
+                            59,
+                            26,
+                            28
+                        ],
+                        "template": [
+                            "SceneManager/LoginAnnouncementClose.png"
+                        ]
+                    }
+                }
+            },
+            {
+                "recognition": {
+                    "type": "OCR",
+                    "desc": "识别是否在公告界面",
+                    "param": {
+                        "roi": [
+                            252,
+                            18,
+                            817,
+                            179
+                        ],
+                        "expected": [
+                            "公告"
+                        ]
+                    }
+                }
+            }
+        ],
+        "action": {
+            "type": "Click"
+        }
     },
     "__ScenePrivateLoginMonthlyPassConfirm": {
         "desc": "领取月卡，无法跳过必须领取",

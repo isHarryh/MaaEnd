@@ -4,7 +4,44 @@
 我们的主体流程采用 [Pipeline JSON 低代码](/assets/resource/pipeline)，复杂逻辑通过 [go-service](/agent/go-service) 编码实现。
 若有意加入 MaaEnd 开发，可以先阅读 [MaaFramework 相关文档](https://maafw.com/)，了解低代码逻辑、相关编辑调试工具的使用，也可以查看 [MaaFramework 教学视频](https://www.bilibili.com/video/BV1yr421E7MW)，但视频较旧，请以文档为主哦~
 
-## 本地部署
+## 快速本地部署
+
+### 第一步：把工作区跑起来
+
+#### 你至少需要这些环境
+
+- Git
+- Python 3.10+
+- Node.js 22
+- pnpm 10+
+- Go 1.25.6+
+
+其中：
+
+- `package.json` 要求 Node 22。
+- `agent/go-service/go.mod` 当前是 Go 1.25.6。
+- Python 用来跑工作区脚本和辅助工具。
+
+#### 克隆完整代码
+
+打开终端（命令行）：
+
+- Windows：Git Bash 或 CMD
+- macOS / Linux：Terminal
+
+按顺序执行命令：
+
+```bash
+# 克隆完整代码
+git clone --recursive https://github.com/MaaEnd/MaaEnd.git
+
+# 进入项目根目录
+cd MaaEnd
+```
+
+克隆成功后目录下会有相关源码文件，若缺失请重新尝试上述操作（网络问题可能需要使用代理）。
+
+#### 工作区配置
 
 我们提供一个自动化的**工作区初始化脚本**，只需执行：
 
@@ -12,7 +49,7 @@
 python tools/setup_workspace.py
 ```
 
-即可完整设置开发所需的环境。
+即可完整设置开发所需的环境。之后只要打开项目根目录下的 `install/mxu.exe` 即可使用 UI 进行调试（不过不推荐这种调试方法，建议根据下文开发技巧使用开发工具进行调试）。
 
 > [!NOTE]
 >
@@ -22,19 +59,7 @@ python tools/setup_workspace.py
 <summary>点此展开手动配置指南。</summary>
 <br>
 
-1. 完整克隆项目及子仓库。
-
-    ```bash
-    git clone https://github.com/MaaEnd/MaaEnd --recursive
-    ```
-
-    **不要漏了 `--recursive`**
-
-    如果你已经 clone 了项目，但没有使用 `--recursive` 参数，现在你可以在项目的根目录执行
-
-    ```bash
-    git submodule update --init --recursive
-    ```
+1. 完整克隆项目及子仓库。按照 [克隆完整代码](#克隆完整代码) 来完整克隆项目及子仓库。
 
 2. 下载 [MaaFramework](https://github.com/MaaXYZ/MaaFramework/releases) 并解压内容到 `deps` 文件夹。
 
@@ -62,11 +87,26 @@ python tools/setup_workspace.py
 
 </details>
 
+#### 入门开发路线
+
+完全不熟悉 MaaFramework 的开发者，建议先阅读 [开发入门路线](./getting-started.md)。该文档按实际开发优先级引导你搭好工作区、看懂项目结构并完成一次小改动，有相关开发经验的开发者可以跳过。
+
 ## 开发技巧
 
 ### 关于开发体验
 
-- MaaFramework 有丰富的 [开发工具](https://github.com/MaaXYZ/MaaFramework/tree/main?tab=readme-ov-file#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7) 可以进行低代码编辑、调试等，请善加使用。工作目录可设置为**项目根目录**的文件夹。
+MaaFramework 有丰富的 [开发工具](https://github.com/MaaXYZ/MaaFramework/tree/main?tab=readme-ov-file#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7) 可以进行低代码编辑、调试等，请善加使用，本文档在下文给出了相关推荐。调试时工作目录可设置为**项目根目录**的文件夹
+
+| 工具                                                                       | 简介                                                        |
+| -------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| [MaaDebugger](https://github.com/MaaXYZ/MaaDebugger)                       | 独立调试工具                                                |
+| [Maa Pipeline Support](https://github.com/neko-para/maa-support-extension) | VSCode 插件，提供调试、截图、获取 ROI、取色等功能           |
+| [MFAToolsPlus](https://github.com/SweetSmellFox/MFAToolsPlus)              | 跨平台开发工具箱，提供便捷的数据获取和模拟测试方法          |
+| [MaaPipelineEditor](https://mpe.codax.site/docs)                           | 可视化阅读与构建 Pipeline，功能完备，提供渐进式本地功能扩展 |
+| [MaaLogAnalyzer](https://github.com/MaaXYZ/MaaLogAnalyzer)                 | 可视化分析基于 MaaFramework 开发应用的日志                  |
+
+### 注意事项
+
 - 每次修改 Pipeline 后只需要在开发工具中重新加载资源即可；但每次修改 go-service 都需要执行 `python tools/build_and_install.py` 重新进行编译（可以在 VS Code 的终端选项运行任务中使用 `build` 任务快捷运行）。
 - 可利用 VS Code 等工具对 go-service 挂断点或单步运行（自行 debug 启动 go-service，或利用 vscode attach）。~~不是哥们，你靠看日志改代码啊？~~
 - MXU 是面向终端用户的 GUI，不建议使用其开发调试，上述的 MaaFramework 开发工具可以极大程度提高开发效率。~~真狠啊就硬试啊~~

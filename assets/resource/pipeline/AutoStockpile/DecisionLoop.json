@@ -84,7 +84,7 @@
         ]
     },
     "AutoStockpileSelectedGoodsClick": {
-        "desc": "点击决策选中的商品 (template)",
+        "desc": "[Go覆盖] 点击决策选中的商品 (template)",
         "enabled": false,
         "recognition": {
             "type": "TemplateMatch",
@@ -126,6 +126,16 @@
             }
         },
         "pre_delay": 0,
+        "post_wait_freezes": {
+            "time": 80,
+            "target": [
+                1000,
+                240,
+                80,
+                30
+            ],
+            "threshold": 0.98
+        },
         "post_delay": 0,
         "rate_limit": 0,
         "next": [
@@ -210,10 +220,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    1000,
-                    244,
-                    80,
-                    20
+                    975,
+                    230,
+                    130,
+                    50
                 ],
                 "expected": [
                     "\\d{3,4}"
@@ -224,7 +234,8 @@
                         ""
                     ]
                 ],
-                "color_filter": "AutoStockpileReconcilePriceFilter"
+                "color_filter": "AutoStockpileReconcilePriceFilter",
+                "order_by": "Vertical"
             }
         },
         "pre_delay": 0,

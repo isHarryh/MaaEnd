@@ -27,7 +27,7 @@
             "param": {
                 "all_of": [
                     "AutoStockpileFindMarketSidebar",
-                    "AutoStockpileElasticGoodsButton"
+                    "AutoStockpileElasticGoodsSelected"
                 ]
             }
         },
@@ -60,6 +60,7 @@
         ]
     },
     "AutoStockpileCheckInStore": {
+        "desc": "检查商店图标，确认是否位于物资调度",
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -84,20 +85,11 @@
     "AutoStockpileElasticGoodsButton": {
         "desc": "弹性物资调度黑白双煞",
         "recognition": {
-            "type": "TemplateMatch",
+            "type": "Or",
             "param": {
-                "roi": [
-                    340,
-                    55,
-                    60,
-                    70
-                ],
-                "template": [
-                    "AutoStockpile/ElasticGoodsButton.png",
-                    "AutoStockpile/ElasticGoodsButtonSelected.png"
-                ],
-                "threshold": [
-                    0.8
+                "any_of": [
+                    "AutoStockpileElasticGoods",
+                    "AutoStockpileElasticGoodsSelected"
                 ]
             }
         },
@@ -124,7 +116,16 @@
             "type": "Click",
             "param": {}
         },
-        "post_wait_freezes": 80,
+        "post_wait_freezes": {
+            "time": 80,
+            "target": [
+                10,
+                170,
+                150,
+                40
+            ],
+            "threshold": 0.98
+        },
         "post_delay": 0,
         "rate_limit": 0,
         "next": [
@@ -162,17 +163,66 @@
             "param": {
                 "target": [
                     1100,
-                    70,
+                    50,
                     10,
                     10
                 ]
             }
         },
-        "post_wait_freezes": 80,
+        "post_wait_freezes": {
+            "time": 80,
+            "target": [
+                15,
+                160,
+                40,
+                150
+            ],
+            "threshold": 0.98
+        },
         "post_delay": 0,
         "rate_limit": 0,
         "next": [
             "[Anchor]AutoStockpileDecision"
         ]
+    },
+    "AutoStockpileElasticGoods": {
+        "desc": "弹性物资调度未选中",
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    340,
+                    55,
+                    60,
+                    70
+                ],
+                "template": [
+                    "AutoStockpile/ElasticGoodsButton.png"
+                ],
+                "threshold": [
+                    0.8
+                ]
+            }
+        }
+    },
+    "AutoStockpileElasticGoodsSelected": {
+        "desc": "弹性物资调度选中",
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    340,
+                    55,
+                    60,
+                    70
+                ],
+                "template": [
+                    "AutoStockpile/ElasticGoodsButtonSelected.png"
+                ],
+                "threshold": [
+                    0.8
+                ]
+            }
+        }
     }
 }

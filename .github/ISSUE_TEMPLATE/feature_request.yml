@@ -17,8 +17,8 @@ body:
       label: 日志文件
       description: |
         🐛 很多时候您的提议可能已经实现，但由于出现 BUG 未能正常工作，请提交日志以协助排查。  
-        💡 点击界面上“运行日志”右上角的 🗄️ 导出日志文件。
-        ⚠️ 请将上传导出后的 MaaEnd-logs-xxx.zip 文件 ⚠️
+        💡 点击界面上“运行日志”右上角的 🗄️ 导出日志文件。  
+        ⚠️ 请将上传导出后的 MaaEnd-logs-xxx.zip 文件 ⚠️  
         🚫 **否则您的提议可能会被直接关闭！**  
     validations:
       required: true

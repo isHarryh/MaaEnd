@@ -1345,6 +1345,50 @@
                     }
                 },
                 {
+                    "name": "赤铜粉末",
+                    "label": "$item.CuprumPowder",
+                    "pipeline_override": {
+                        "ItemTransferClickItemCategory": {
+                            "template": "ItemTransfer/Product.png",
+                            "next": [
+                                "ItemTransferFindItemWithOCR"
+                            ]
+                        },
+                        "ItemTransferRepoToBag": {
+                            "next": [
+                                "ItemTransferClickSortAscending",
+                                "ItemTransferClickItemCategory",
+                                "ItemTransferFindItemWithOCR"
+                            ]
+                        },
+                        "ItemTransferBagToRepo": {
+                            "next": [
+                                "ItemTransferFindItemWithOCRBag"
+                            ]
+                        },
+                        "ItemTransferBagToOriginRepo": {
+                            "next": [
+                                "ItemTransferFindItemWithOCRBagReturn"
+                            ]
+                        },
+                        "ItemTransferFindItemWithOCR": {
+                            "custom_action_param": {
+                                "item_name": "赤铜粉末"
+                            }
+                        },
+                        "ItemTransferFindItemWithOCRBag": {
+                            "custom_action_param": {
+                                "item_name": "赤铜粉末"
+                            }
+                        },
+                        "ItemTransferFindItemWithOCRBagReturn": {
+                            "custom_action_param": {
+                                "item_name": "赤铜粉末"
+                            }
+                        }
+                    }
+                },
+                {
                     "name": "紫晶质瓶",
                     "label": "$item.AmethystBottle",
                     "pipeline_override": {

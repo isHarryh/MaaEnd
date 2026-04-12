@@ -1,4 +1,4 @@
-package quantizedsliding
+package bettersliding
 
 import (
 	"encoding/json"
@@ -24,26 +24,42 @@ func buildSwipeEnd(direction string) ([]int, error) {
 	}
 }
 
-func buildMainInitializationOverride(end []int, quantityBox []int, quantityFilter *quantityFilterParam, quantityOnlyRec bool) map[string]any {
-	quantityParam := map[string]any{
-		"roi":      append([]int(nil), quantityBox...),
-		"only_rec": quantityOnlyRec,
-	}
-
+func buildMainInitializationOverride(end []int, quantityBox []int, quantityFilter *quantityFilterParam, quantityOnlyRec bool, swipeButton string, greenMask bool) map[string]any {
 	override := map[string]any{
-		nodeQuantizedSlidingSwipeToMax: map[string]any{
+		nodeBetterSlidingSwipeToMax: map[string]any{
 			"action": map[string]any{
 				"param": map[string]any{
 					"end": append([]int(nil), end...),
 				},
 			},
 		},
-		nodeQuantizedSlidingGetQuantity: map[string]any{
+	}
+
+	if swipeButton != "" {
+		override[nodeBetterSlidingSwipeButton] = map[string]any{
 			"recognition": map[string]any{
 				"param": map[string]any{
-					"roi":      quantityParam["roi"],
-					"only_rec": quantityParam["only_rec"],
+					"template":   []string{swipeButton},
+					"green_mask": greenMask,
 				},
+			},
+		}
+	}
+
+	if len(quantityBox) == 0 {
+		return override
+	}
+
+	quantityParam := map[string]any{
+		"roi":      append([]int(nil), quantityBox...),
+		"only_rec": quantityOnlyRec,
+	}
+
+	override[nodeBetterSlidingGetQuantity] = map[string]any{
+		"recognition": map[string]any{
+			"param": map[string]any{
+				"roi":      quantityParam["roi"],
+				"only_rec": quantityParam["only_rec"],
 			},
 		},
 	}
@@ -52,13 +68,13 @@ func buildMainInitializationOverride(end []int, quantityBox []int, quantityFilte
 		return override
 	}
 
-	quantityParam["color_filter"] = nodeQuantizedSlidingQuantityFilter
-	override[nodeQuantizedSlidingGetQuantity] = map[string]any{
+	quantityParam["color_filter"] = nodeBetterSlidingQuantityFilter
+	override[nodeBetterSlidingGetQuantity] = map[string]any{
 		"recognition": map[string]any{
 			"param": quantityParam,
 		},
 	}
-	override[nodeQuantizedSlidingQuantityFilter] = map[string]any{
+	override[nodeBetterSlidingQuantityFilter] = map[string]any{
 		"recognition": map[string]any{
 			"param": map[string]any{
 				"method": quantityFilter.Method,
@@ -72,21 +88,11 @@ func buildMainInitializationOverride(end []int, quantityBox []int, quantityFilte
 }
 
 func buildCheckQuantityBranchOverride(nextNode string, target buttonTarget, repeat int, greenMask bool) map[string]any {
-	override := map[string]any{
-		nodeQuantizedSlidingDone: map[string]any{
-			"enabled": nextNode == nodeQuantizedSlidingDone,
-		},
-		nodeQuantizedSlidingIncreaseQuantity: map[string]any{
-			"enabled": nextNode == nodeQuantizedSlidingIncreaseQuantity,
-		},
-		nodeQuantizedSlidingDecreaseQuantity: map[string]any{
-			"enabled": nextNode == nodeQuantizedSlidingDecreaseQuantity,
-		},
+	if nextNode != nodeBetterSlidingIncreaseQuantity && nextNode != nodeBetterSlidingDecreaseQuantity {
+		return map[string]any{}
 	}
 
-	if nextNode != nodeQuantizedSlidingIncreaseQuantity && nextNode != nodeQuantizedSlidingDecreaseQuantity {
-		return override
-	}
+	override := map[string]any{}
 
 	repeat = clampClickRepeat(repeat)
 
@@ -98,7 +104,6 @@ func buildCheckQuantityBranchOverride(nextNode string, target buttonTarget, repe
 	}
 
 	override[nextNode] = map[string]any{
-		"enabled": true,
 		"action": map[string]any{
 			"param": map[string]any{
 				"target": append([]int(nil), target.coordinates...),
@@ -111,24 +116,43 @@ func buildCheckQuantityBranchOverride(nextNode string, target buttonTarget, repe
 }
 
 func overrideCheckQuantityBranch(ctx *maa.Context, currentNode string, nextNode string, target buttonTarget, repeat int, greenMask bool) error {
-	if err := ctx.OverridePipeline(buildCheckQuantityBranchOverride(nextNode, target, repeat, greenMask)); err != nil {
-		return fmt.Errorf("%w: %w", errCheckQuantityBranchPipelineOverride, err)
+	if override := buildCheckQuantityBranchOverride(nextNode, target, repeat, greenMask); len(override) > 0 {
+		if err := ctx.OverridePipeline(override); err != nil {
+			return fmt.Errorf("%w: %w", errCheckQuantityBranchPipelineOverride, err)
+		}
 	}
-	if err := ctx.OverrideNext(currentNode, []maa.NextItem{{Name: nextNode}}); err != nil {
+	if err := ctx.OverrideNext(currentNode, buildCheckQuantityBranchNextItems(nextNode)); err != nil {
 		return fmt.Errorf("%w: %w", errCheckQuantityBranchNextOverride, err)
 	}
 
 	return nil
 }
 
+func buildCheckQuantityBranchNextItems(nextNode string) []maa.NextItem {
+	nextItems := []maa.NextItem{{Name: nextNode}}
+	if nextNode != nodeBetterSlidingIncreaseQuantity && nextNode != nodeBetterSlidingDecreaseQuantity {
+		return nextItems
+	}
+
+	return append(nextItems, maa.NextItem{Name: nodeBetterSlidingJumpBackMoveMouse})
+}
+
 func resolveButtonHelperNode(nextNode string) string {
 	switch nextNode {
-	case nodeQuantizedSlidingIncreaseQuantity:
-		return nodeQuantizedSlidingIncreaseButton
-	case nodeQuantizedSlidingDecreaseQuantity:
-		return nodeQuantizedSlidingDecreaseButton
+	case nodeBetterSlidingIncreaseQuantity:
+		return nodeBetterSlidingIncreaseButton
+	case nodeBetterSlidingDecreaseQuantity:
+		return nodeBetterSlidingDecreaseButton
 	default:
 		return ""
+	}
+}
+
+func buildExceedingOverrideEnable(nodeName string, enabled bool) map[string]any {
+	return map[string]any{
+		nodeName: map[string]any{
+			"enabled": enabled,
+		},
 	}
 }
 
@@ -145,7 +169,6 @@ func buildTemplateMatchButtonHelperOverride(template string, greenMask bool) map
 
 func buildTemplateMatchButtonOverride(helperNode string, repeat int) map[string]any {
 	return map[string]any{
-		"enabled": true,
 		"recognition": map[string]any{
 			"type": "And",
 			"param": map[string]any{
@@ -170,8 +193,8 @@ func buildInternalPipelineOverride(customActionParam string) (map[string]any, er
 		return nil, err
 	}
 
-	override := make(map[string]any, len(quantizedSlidingActionNodes))
-	for _, nodeName := range quantizedSlidingActionNodes {
+	override := make(map[string]any, len(betterSlidingActionNodes))
+	for _, nodeName := range betterSlidingActionNodes {
 		override[nodeName] = map[string]any{
 			"action": map[string]any{
 				"param": map[string]any{

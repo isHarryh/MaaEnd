@@ -1,26 +1,27 @@
 {
-    "QuantizedSlidingSwipeButton": {
+    "BetterSlidingSwipeButton": {
         "desc": "用于定位滑动按钮",
         "recognition": {
             "type": "TemplateMatch",
             "param": {
                 "template": [
-                    "QuantizedSliding/SwipeButton.png"
+                    "BetterSliding/SwipeButton.png"
                 ],
-                "green_mask": true
+                "green_mask": true,
+                "order_by": "Score"
             }
         },
         "pre_delay": 0,
         "post_delay": 0,
         "rate_limit": 0
     },
-    "QuantizedSlidingIncreaseButton": {
+    "BetterSlidingIncreaseButton": {
         "desc": "定位增加数量按钮，具体模板会在运行时被 go 覆写",
         "recognition": {
             "type": "TemplateMatch",
             "param": {
                 "template": [
-                    "QuantizedSliding/SwipeButton.png"
+                    "BetterSliding/SwipeButton.png"
                 ],
                 "green_mask": false,
                 "threshold": [
@@ -33,13 +34,13 @@
         "post_delay": 0,
         "rate_limit": 0
     },
-    "QuantizedSlidingDecreaseButton": {
+    "BetterSlidingDecreaseButton": {
         "desc": "定位减少数量按钮，具体模板会在运行时被 go 覆写",
         "recognition": {
             "type": "TemplateMatch",
             "param": {
                 "template": [
-                    "QuantizedSliding/SwipeButton.png"
+                    "BetterSliding/SwipeButton.png"
                 ],
                 "green_mask": false,
                 "threshold": [
@@ -52,7 +53,7 @@
         "post_delay": 0,
         "rate_limit": 0
     },
-    "QuantizedSlidingGetQuantity": {
+    "BetterSlidingGetQuantity": {
         "desc": "识别当前选择的数量",
         "recognition": {
             "type": "OCR",
@@ -66,14 +67,15 @@
                 "expected": [
                     "\\d+"
                 ],
-                "only_rec": false
+                "only_rec": false,
+                "order_by": "Length"
             }
         },
         "pre_delay": 0,
         "post_delay": 0,
         "rate_limit": 0
     },
-    "QuantizedSlidingQuantityFilter": {
+    "BetterSlidingQuantityFilter": {
         "desc": "辅助GetQuantity节点进行OCR",
         "recognition": {
             "type": "ColorMatch",

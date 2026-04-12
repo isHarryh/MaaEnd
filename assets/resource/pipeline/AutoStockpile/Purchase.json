@@ -75,14 +75,14 @@
         "action": {
             "type": "Custom",
             "param": {
-                "custom_action": "QuantizedSliding",
+                "custom_action": "BetterSliding",
                 "custom_action_param": {
                     "DecreaseButton": "AutoStockpile/DecreaseButton.png",
                     "Direction": "right",
                     "IncreaseButton": "AutoStockpile/IncreaseButton.png",
                     "GreenMask": true,
+                    "Target": 1,
                     "Quantity": {
-                        "Target": 1,
                         "Box": [
                             360,
                             480,
@@ -120,22 +120,12 @@
         "enabled": false,
         "pre_delay": 0,
         "action": {
-            "type": "Swipe",
+            "type": "Custom",
             "param": {
-                "begin": [
-                    650,
-                    500,
-                    10,
-                    10
-                ],
-                "end": [
-                    [
-                        700,
-                        500,
-                        10,
-                        10
-                    ]
-                ]
+                "custom_action": "BetterSliding",
+                "custom_action_param": {
+                    "Direction": "right"
+                }
             }
         },
         "post_delay": 0,

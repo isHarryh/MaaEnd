@@ -299,6 +299,7 @@
     "task.DeliveryJobs.PackCargoOnly.label": "貨物パッキングのみ",
     "task.DeliveryJobs.PackCargoOnly.description": "有効にすると、貨物の自動パッキングのみを行い、依頼の受注は行いません。",
     "task.ClaimSimulationRewards.label": "📦模擬空間報酬受取",
+    "task.ClaimSimulationRewards.description": "模擬空間内の報酬を自動で受け取ります。",
     "task.ClaimSimulationRewards.error_not_found": "模擬空間が見つかりません。手動で切り替えてください。",
     "task.ClaimSimulationRewards.success_finished": "模擬空間報酬の受取が完了しました。",
     "option.ClaimSimulationArea.label": "エリア",

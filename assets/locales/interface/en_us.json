@@ -339,6 +339,7 @@
     "task.DeliveryJobs.PackCargoOnly.label": "Pack Cargo Only",
     "task.DeliveryJobs.PackCargoOnly.description": "When enabled, it only automatically packs cargo and does not accept jobs.",
     "task.ClaimSimulationRewards.label": "📦Claim Simulation Rewards",
+    "task.ClaimSimulationRewards.description": "Automatically claim rewards in the simulation space.",
     "task.ClaimSimulationRewards.error_not_found": "Simulation UI not detected. Please switch manually.",
     "task.ClaimSimulationRewards.success_finished": "Simulation  rewards claimed successfully.",
     "option.ClaimSimulationArea.label": "Area",

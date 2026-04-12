@@ -299,6 +299,7 @@
     "task.DeliveryJobs.PackCargoOnly.label": "仅装箱货物",
     "task.DeliveryJobs.PackCargoOnly.description": "开启后仅会自动装箱货物，不会接取任务。",
     "task.ClaimSimulationRewards.label": "📦领取模拟空间奖励",
+    "task.ClaimSimulationRewards.description": "自动领取模拟空间内的奖励",
     "task.ClaimSimulationRewards.error_not_found": "未检测到[模拟空间]界面，请手动切换",
     "task.ClaimSimulationRewards.success_finished": "模拟空间奖励领取完毕",
     "option.ClaimSimulationArea.label": "地区",

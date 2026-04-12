@@ -299,6 +299,7 @@
     "task.DeliveryJobs.PackCargoOnly.label": "화물 포장만",
     "task.DeliveryJobs.PackCargoOnly.description": "활성화하면 화물 자동 포장만 수행하고 임무를 수락하지 않습니다.",
     "task.ClaimSimulationRewards.label": "📦시뮬레이션 공간 보상 수령",
+    "task.ClaimSimulationRewards.description": "시뮬레이션 공간 내 보상을 자동으로 수령합니다.",
     "task.ClaimSimulationRewards.error_not_found": "[시뮬레이션 공간] 화면을 찾을 수 없습니다. 수동으로 전환해 주세요.",
     "task.ClaimSimulationRewards.success_finished": "시뮬레이션 공간 보상 수령 완료.",
     "option.ClaimSimulationArea.label": "지역",

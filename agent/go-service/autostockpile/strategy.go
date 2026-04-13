@@ -1,6 +1,9 @@
 package autostockpile
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 const (
 	regionBaseValleyIV = 0
@@ -24,23 +27,46 @@ var tierBases = map[string]int{
 	"Tier3": tierBaseTier3,
 }
 
-// buildPriceLimitsForRegion 根据地区名称，通过 region_base + tier_base 公式计算各档位的价格阈值。
-func buildPriceLimitsForRegion(region string) (PriceLimitConfig, error) {
+var weekdayAdjustments = map[time.Weekday]int{
+	time.Monday:    -50,
+	time.Tuesday:   0,
+	time.Wednesday: -150,
+	time.Thursday:  -200,
+	time.Friday:    -250,
+	time.Saturday:  -200,
+	time.Sunday:    -50,
+}
+
+// buildPriceLimitsForRegion 根据地区名称构建各档位的价格阈值。
+func buildPriceLimitsForRegion(region string, weekday time.Weekday, applyWeekdayAdjustment bool) (PriceLimitConfig, error) {
 	regionBase, ok := regionBases[region]
 	if !ok {
 		return nil, fmt.Errorf("region %q is not configured", region)
 	}
 
+	weekdayAdjustment := 0
+	if applyWeekdayAdjustment {
+		var ok bool
+		weekdayAdjustment, ok = weekdayAdjustments[weekday]
+		if !ok {
+			return nil, fmt.Errorf("weekday %d is not supported", weekday)
+		}
+	}
+
 	priceLimits := make(PriceLimitConfig, len(tierBases))
 	for tierSuffix, tierBase := range tierBases {
-		priceLimits[region+"."+tierSuffix] = regionBase + tierBase
+		priceLimits[region+"."+tierSuffix] = regionBase + tierBase + weekdayAdjustment
 	}
 	return priceLimits, nil
 }
 
 // buildSelectionConfig 根据地区名称构建商品选择配置，使用公式计算价格阈值。
-func buildSelectionConfig(region string) (SelectionConfig, error) {
-	priceLimits, err := buildPriceLimitsForRegion(region)
+func buildSelectionConfig(region string, loc *time.Location, applyWeekdayAdjustment bool) (SelectionConfig, error) {
+	return buildSelectionConfigForWeekday(region, resolveServerWeekday(time.Now(), loc), applyWeekdayAdjustment)
+}
+
+func buildSelectionConfigForWeekday(region string, weekday time.Weekday, applyWeekdayAdjustment bool) (SelectionConfig, error) {
+	priceLimits, err := buildPriceLimitsForRegion(region, weekday, applyWeekdayAdjustment)
 	if err != nil {
 		return SelectionConfig{}, err
 	}

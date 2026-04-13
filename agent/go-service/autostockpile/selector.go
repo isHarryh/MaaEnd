@@ -83,7 +83,20 @@ func (a *SelectItemAction) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool 
 		Str("region", region).
 		Msg("selector region resolved")
 
-	cfg, err := buildSelectionConfig(region)
+	serverTimeOffset, err := loadServerTimeOffsetFromAttach(ctx, attachNodeName)
+	if err != nil {
+		return stopTaskWithFocus(ctx, AbortReasonSelectionConfigInvalidFatal, err)
+	}
+	applyWeekdayAdjustment := serverTimeOffset != nil
+	serverLocation := locationFromUTCOffset(serverTimeOffset)
+
+	log.Info().
+		Str("component", "autostockpile").
+		Str("region", region).
+		Str("server_location", serverLocation.String()).
+		Msg("selector server time resolved")
+
+	cfg, err := buildSelectionConfig(region, serverLocation, applyWeekdayAdjustment)
 	if err != nil {
 		return stopTaskWithFocus(ctx, AbortReasonSelectionConfigInvalidFatal, err)
 	}
@@ -106,13 +119,12 @@ func (a *SelectItemAction) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool 
 			Str("reason", selection.Reason).
 			Msg("no qualifying product selected")
 		maafocus.Print(ctx, i18n.T("autostockpile.no_qualifying_product", selection.Reason))
-		if err := overrideSkipBranch(ctx, arg.CurrentTaskName); err != nil {
+		if err := overrideSkipBranch(ctx); err != nil {
 			log.Error().
 				Err(err).
 				Str("component", "autostockpile").
 				Str("node", arg.CurrentTaskName).
-				Str("next", skipNodeName).
-				Msg("failed to short-circuit to skip branch")
+				Msg("failed to enable skip branch")
 			return false
 		}
 		return true
@@ -128,13 +140,12 @@ func (a *SelectItemAction) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool 
 			Int("quota_overflow", data.Quota.Overflow).
 			Msg("quantity decision requested skip short-circuit")
 		maafocus.Print(ctx, i18n.T("autostockpile.hit_but_skip", quantityDecision.Reason))
-		if err := overrideSkipBranch(ctx, arg.CurrentTaskName); err != nil {
+		if err := overrideSkipBranch(ctx); err != nil {
 			log.Error().
 				Err(err).
 				Str("component", "autostockpile").
 				Str("node", arg.CurrentTaskName).
-				Str("next", skipNodeName).
-				Msg("failed to short-circuit quantity skip branch")
+				Msg("failed to enable quantity skip branch")
 			return false
 		}
 		return true
@@ -302,13 +313,12 @@ func routeSkipWithAbortReason(ctx *maa.Context, currentTaskName string, reason A
 	} else {
 		maafocus.Print(ctx, i18n.T("autostockpile.abort_info", focusPrefix, reasonText))
 	}
-	if err := overrideSkipBranch(ctx, currentTaskName); err != nil {
+	if err := overrideSkipBranch(ctx); err != nil {
 		log.Error().
 			Err(err).
 			Str("component", "autostockpile").
 			Str("node", currentTaskName).
-			Str("next", skipNodeName).
-			Msg("failed to route abort path to skip branch")
+			Msg("failed to enable abort skip branch")
 		return false
 	}
 

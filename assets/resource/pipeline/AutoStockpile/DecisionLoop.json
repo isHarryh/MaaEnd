@@ -194,6 +194,7 @@
     },
     "AutoStockpileSkip": {
         "desc": "决策未找到合格商品或提前结束",
+        "enabled": false,
         "pre_delay": 0,
         "post_delay": 0,
         "rate_limit": 0,
@@ -248,5 +249,8 @@
             "AutoStockpileRelayNodeDecisionReady",
             "AutoStockpileBackToSelection"
         ]
+    },
+    "AutoStockpileAttach": {
+        "desc": "承载Attach参数，请勿重命名或删除"
     }
 }
